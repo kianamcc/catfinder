@@ -1,0 +1,81 @@
+.home {
+  height: 100vh;
+}
+
+.home-title {
+  font-size: 4.5rem;
+}
+
+.home-container {
+  display: flex;
+  height: 100%;
+}
+
+.home-left-container {
+  flex: 1;
+}
+
+.home-left-flex-container {
+  height: 100%;
+  gap: 20px;
+  display: flex;
+  flex-direction: column;
+  padding: 160px 0px 15px 20px;
+}
+
+
+.home-right-container {
+  flex: 1;
+  background-image: url("../../assets/cat.jpg");
+  background-size: cover;
+}
+
+.home-btn {
+  padding: 15px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  width: 15vw;
+  color: white;
+  letter-spacing: 2px;
+  background-color: #ffbe0b;
+}
+
+.home-btn:hover {
+  background-color: #F4B404;
+}
+
+@media only screen and (max-width: 960px) {
+
+}
+
+@media screen and (max-width: 768px) {
+  .home-title {
+    font-size: 3.5rem;
+  }
+  .home-container {
+    flex-direction: column;
+  }
+
+  .home-left-flex-container {
+    top: 70px;
+    left: 30px;
+  }
+
+  .home-btn {
+    width: 30vw;
+  }
+}
+
+
+@media only screen and (max-width: 640px) {
+  /*your CSS Rules*/     
+}
+@media only screen and (max-width: 480px) {
+  /*your CSS Rules*/     
+}       
+@media only screen and (max-width: 320px) {
+  /*your CSS Rules*/ 
+}

@@ -1,0 +1,14 @@
+.footer-container {
+   height: 10vh;
+}
+
+.copyright {
+   display: flex;
+   height: 100%;
+   justify-content: center;
+}
+
+.copyright-text {
+   align-self: flex-end;
+   padding: 20px 0px;
+}
