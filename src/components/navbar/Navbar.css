@@ -6,11 +6,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10px 40px;
+    padding: 20px 40px;
 }
 
-.nav-title {
-    font-size: 2rem;
+
+.navbar-logo {
+    height: 100%;
+    width: 20vw;
 }
 
 .nav-links-container {
@@ -29,7 +31,7 @@
 .nav-link {
     text-decoration: none;
     color: #432818;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
 }
 
 .nav-link:hover {
@@ -38,20 +40,34 @@
 }
 
 
-.favorites {
+.favorites-link {
     margin-left: auto;
-    border: 2px solid #d4a373;
+    border: none;
+    background-color:  #ffbe0b;
     border-radius: 15px;
-    padding: 10px;
+    letter-spacing: 1.5px;
 }
 
-.favorites:hover {
-    background-color: orange;
+.fav-link {
+    padding: 10px;
+    display: block;
+    color: white;
+    
+}
+
+.favorites-link {
+    transition: 300ms ease-in-out;
+}
+
+.favorites-link:hover {
+    
+    transition: 300ms ease-in-out;
+    transform: scale(1.15);
 }
 
 .fav-link:hover {
+    color: white;
     border: none;
-    color: #432818;
 }
 
 

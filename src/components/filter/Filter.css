@@ -14,13 +14,13 @@
 }
 
 .filter-input-box {
-    /* text-indent: 5px; */
     font-size: 1.2rem;
     border: none;
     border-radius: 10px;
     height: 100%;
     width: 94%;
     text-indent: 5px;
+    font-family: 'Mali', sans-serif;
     
 }
 
@@ -32,3 +32,29 @@
 }
 
 
+@media only screen and (max-width: 960px) {
+    /*your CSS Rules*/     
+  }
+  @media only screen and (max-width: 768px) {
+    /*your CSS Rules*/     
+  }
+  @media only screen and (max-width: 640px) {
+    /*your CSS Rules*/     
+  }
+  
+  @media only screen and (max-width: 480px) {
+    .filter-inner-container {
+        height: 50px;
+        width: 70vw;
+        padding: 0px 10px;
+    }
+  
+  }       
+  
+  @media only screen and (max-width: 320px) {
+    .filter-inner-container {
+        height: 50px;
+        width: 80vw;
+        padding: 0px 10px;
+    }
+  }

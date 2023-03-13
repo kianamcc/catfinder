@@ -1,17 +1,21 @@
 .card-container {
   /* padding: 0px 0px 20px 0px; */
+  
+}
+
+.heart-fill-icon {
+  color: #ef233c;
 }
 
 .card-item-container {
-  /* background-color: rgba(0, 0, 0, 0.4); */
-  background-color: #d4a373;
+  background-color: #ffbc42;
   border-radius: 10px;
-  height: 70vh;
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
-.heart-icon {
+.heart-icon-container {
   cursor: pointer;
 }
 
@@ -62,4 +66,16 @@
 .organization-name {
   font-weight: 600;
   margin-right: 5px;
+}
+
+@media only screen and (max-width: 320px) {
+
+  .card-grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 250px);
+
+  }
+  .card-bottom {
+    font-size: 0.9rem;
+  }
 }

@@ -1,12 +1,13 @@
 import React from "react";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
+import navLogo from "../../assets/nav-logo.png";
 
 const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="nav-container">
-        <h1 className="nav-title">CatFinder</h1>
+        <img src={navLogo} alt="navbar-logo" className="navbar-logo" />
         <ul className="nav-links-container">
           <li className="nav-link-item-container">
             <Link to="/" className="nav-link">
@@ -23,7 +24,7 @@ const Navbar = () => {
               Donate
             </Link>
           </li>
-          <li className="nav-link-item-container favorites">
+          <li className="nav-link-item-container favorites-link">
             <Link to="/favorites" className="nav-link fav-link">
               Favorites
             </Link>

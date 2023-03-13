@@ -1,16 +1,11 @@
-import React from "react";
-import { AiOutlineHeart } from "react-icons/ai";
+import React, { useState } from "react";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { MdEmail, MdLocationOn } from "react-icons/md";
 import "./Card.css";
 
 const Card = (props) => {
-  // const cardDisplay = catData.map((cat) => {
-  //   return <Card key={cat.id} name={cat.firstName} />;
-  // });
-  // if (props.loading) {
-  //   return <h2>Fetching data...</h2>
-  // }
+  //console.log("currentcats", props.currentCats);
 
   return (
     <section className="card-container">
@@ -18,12 +13,27 @@ const Card = (props) => {
         {props.currentCats.map((cat) => {
           return (
             <div className="card" key={cat.id}>
-              {console.log(cat.id)}
               <div className="card-item-container">
                 <div className="card-top">
                   <h3>{cat.name}</h3>
-                  <div className="heart-icon">
-                    <AiOutlineHeart size={30} />
+                  <div className="heart-icon-container">
+                    {/* {console.log(cat.name, "is fave?: ", cat.isFavorite)} */}
+                    {cat.isFavorite ? (
+                      <AiFillHeart
+                        className="heart-fill-icon"
+                        size={30}
+                        onClick={(e) => {
+                          props.handleRemoveFavorites(cat);
+                        }}
+                      />
+                    ) : (
+                      <AiOutlineHeart
+                        size={30}
+                        onClick={(e) => {
+                          props.handleFavorites(cat);
+                        }}
+                      />
+                    )}
                   </div>
                 </div>
                 <div className="card-img-container">

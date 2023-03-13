@@ -14,7 +14,7 @@ const Pagination = (props) => {
           return (
             <li key={number} className="page-number-item">
               <button
-                className="page-link"
+                className="page-btn"
                 onClick={() => props.handlePageClick(number)}
               >
                 <span className="page-number"> {number}</span>

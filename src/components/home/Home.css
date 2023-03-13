@@ -4,6 +4,7 @@
 
 .home-title {
   font-size: 4.5rem;
+  
 }
 
 .home-container {
@@ -20,7 +21,7 @@
   gap: 20px;
   display: flex;
   flex-direction: column;
-  padding: 160px 0px 15px 20px;
+  padding: 120px 60px 0px 60px;
 }
 
 
@@ -32,19 +33,22 @@
 
 .home-btn {
   padding: 15px;
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: 600;
   border: none;
   border-radius: 20px;
   cursor: pointer;
-  width: 15vw;
+  width: 18vw;
   color: white;
   letter-spacing: 2px;
   background-color: #ffbe0b;
+  transition: 300ms ease-in-out;
+  font-family: 'Mali', sans-serif;
 }
 
 .home-btn:hover {
-  background-color: #F4B404;
+  transition: 300ms ease-in-out;
+  transform: scale(1.08);
 }
 
 @media only screen and (max-width: 960px) {
@@ -73,9 +77,38 @@
 @media only screen and (max-width: 640px) {
   /*your CSS Rules*/     
 }
+
 @media only screen and (max-width: 480px) {
-  /*your CSS Rules*/     
+  .home-left-flex-container {
+    padding: 100px 40px 0px 40px;
+  }
+
+  .home-right-container {
+    display: none;
+  }
+
+  .home-btn {
+    width: 50vw;
+  }
+
 }       
+
 @media only screen and (max-width: 320px) {
-  /*your CSS Rules*/ 
+
+  .home-title {
+    font-size: 2.5rem;
+    
+  }
+
+  .home-left-flex-container {
+    padding: 50px 40px 0px 40px;
+  }
+
+
+  .home-btn {
+    width: 70vw;
+    font-size: 1rem
+  }
+
 }
+

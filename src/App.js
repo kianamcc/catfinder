@@ -15,50 +15,122 @@ import Pagination from "./components/pagination/Pagination";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 const App = () => {
-  const [catData, setCatData] = useState(data);
+  // const [catData, setCatData] = useState(data);
+  const [favoriteCats, setFavoriteCats] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [catsPerPage] = useState(5);
+  const [catsPerPage] = useState(6);
 
   let indexOfLastPost = currentPage * catsPerPage;
   let indexOfFirstPost = indexOfLastPost - catsPerPage;
-  let currentCats = catData.slice(indexOfFirstPost, indexOfLastPost);
+
+  const [catData, setCatData] = useState(
+    data.map((c) => {
+      return { ...c, isFavorite: false };
+    })
+  );
+
+  // var catData = data.map((c) => {
+  //   return { ...c, isFavorite: false };
+  // });
+
+  const [currentCats, setCurrentCats] = useState(
+    catData.slice(indexOfFirstPost, indexOfLastPost)
+  );
+
+  let favoriteCurrentCats = favoriteCats.slice(
+    indexOfFirstPost,
+    indexOfLastPost
+  );
+
+  useEffect(() => {
+    // for (var i = 0, len = localStorage.length; i < len; ++i) {
+    //   console.log(localStorage.getItem(localStorage.key(1)));
+    // }
+
+    const getFavoriteCats = localStorage.getItem("catfinder-favorites");
+    const result = JSON.parse(getFavoriteCats) || [];
+    console.log("local storage favorites: ", result.favorites);
+    console.log("local storage cards: ", result.cards);
+
+    setFavoriteCats(result.favorites);
+    setCatData(result.cards);
+    setCurrentCats(result.cards.slice(indexOfFirstPost, indexOfLastPost));
+  }, [currentPage]);
 
   const handlePageClick = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
-  useEffect(() => {
-    console.log("page changed", currentCats);
-  }, [currentPage]);
+  const saveToLocalStorage = (items) => {
+    const localStorageObj = {
+      favorites: items,
+      cards: catData,
+    };
 
-  // useEffect(() => {
-  //   axios
-  //     .get("https://dummyjson.com/users")
-  //     .then((res) => {
-  //      setLoading(true);
-  //       console.log(res.data.users);
-  //       setCatData(res.data.users);
-  //       setLoading(false);
-  //     })
-  //     .catch((err) => {
-  //       console.log("An error has occured... ", err);
-  //     });
-  // }, []);
+    localStorage.setItem(
+      "catfinder-favorites",
+      JSON.stringify(localStorageObj)
+    );
+    // console.log("test", localStorage["catfinder-favorites"]);
+    // for (const [key, value] of Object.entries(localStorage)) {
+    //   console.log(`val: ${value}`);
+    // }
+  };
 
-  console.log(catData);
+  const handleFavorites = (cat) => {
+    console.log("adding favorite");
+
+    const filterFavoriteDuplicates = favoriteCats.filter(
+      (currentFav) => currentFav.id !== cat.id
+    );
+
+    const newFavoritesList = [...filterFavoriteDuplicates, cat];
+
+    const updateIsFavorite = newFavoritesList.map((currentFav) => {
+      if (currentFav.id === cat.id && currentFav.isFavorite === false) {
+        currentFav.isFavorite = true;
+      }
+      return currentFav;
+    });
+
+    setCatData((prev) =>
+      prev.map((current) => {
+        if (current.id === cat.id && current.isFavorite === false) {
+          current.isFavorite = true;
+        }
+        return current;
+      })
+    );
+
+    console.log("catData", catData);
+
+    //console.log("updated favorites array: ", updateIsFavorite);
+
+    setFavoriteCats(updateIsFavorite);
+    saveToLocalStorage(updateIsFavorite);
+  };
+
+  const handleRemoveFavorites = (cat) => {
+    console.log("removing favorite");
+
+    const filterUnfavorite = favoriteCats.filter(
+      (currentFav) => currentFav.id !== cat.id
+    );
+
+    setCatData((prev) =>
+      prev.map((current) => {
+        if (current.id === cat.id && current.isFavorite === true) {
+          current.isFavorite = false;
+        }
+        return current;
+      })
+    );
+
+    setFavoriteCats(filterUnfavorite);
+    saveToLocalStorage(filterUnfavorite);
+  };
 
   return (
-    // <div className="App">
-    //   <Navbar />
-    //   <Home />
-    //   <Card currentCats={currentCats} />
-    //   <Pagination
-    //     totalCats={catData.length}
-    //     catsPerPage={catsPerPage}
-    //     handlePageClick={handlePageClick}
-    //   />
-    //   <Footer />
-    // </div>
     <div className="App">
       <Router>
         <Navbar />
@@ -70,7 +142,11 @@ const App = () => {
               <Fragment>
                 <Home />
                 <Filter />
-                <Card currentCats={currentCats} />
+                <Card
+                  currentCats={currentCats}
+                  handleFavorites={handleFavorites}
+                  handleRemoveFavorites={handleRemoveFavorites}
+                />
                 <Pagination
                   totalCats={catData.length}
                   catsPerPage={catsPerPage}
@@ -81,7 +157,17 @@ const App = () => {
           />
           <Route path="/about" element={<About />} />
           <Route path="/donate" element={<Donate />} />
-          <Route path="/favorites" element={<Favorites />} />
+          <Route
+            path="/favorites"
+            element={
+              <Favorites
+                currentCats={favoriteCurrentCats}
+                handleFavorites={handleFavorites}
+                handleRemoveFavorites={handleRemoveFavorites}
+                favoriteCats={favoriteCats}
+              />
+            }
+          />
         </Routes>
 
         <Footer />

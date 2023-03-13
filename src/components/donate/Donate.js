@@ -19,17 +19,17 @@ const Donate = () => {
       <div className="donate-bottom">
         <div className="donate-perks">
           <div className="donate-perk-item">
-            <GiCannedFish size={75} />
+            <GiCannedFish size={75} className="donate-icon" />
             <span className="donate-description">
               Food, bedding, and other basic supplies
             </span>
           </div>
           <div className="donate-perk-item">
-            <MdOutlineMedicalServices size={75} />
+            <MdOutlineMedicalServices size={75} className="donate-icon" />
             <span className="donate-description">Veterinarian care</span>
           </div>
           <div className="donate-perk-item">
-            <BiHomeHeart size={75} />
+            <BiHomeHeart size={75} className="donate-icon" />
             <span className="donate-description">
               Give animals a chance to find a home
             </span>

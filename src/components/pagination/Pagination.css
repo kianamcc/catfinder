@@ -15,7 +15,7 @@
     flex-direction: column;
 }
 
-.page-link {
+.page-btn {
     text-decoration: none;
     color: #432818;
     cursor: pointer;
@@ -25,12 +25,18 @@
     background-color: #ffbe0b;
     display: flex;
     align-items: center;
-    gap: 2px;
+    gap: 3px;
     font-weight: 600;
     border-radius: 5px;
 }
 
-.page-icon {
-    color: #d4a373;
+.page-btn:hover {
+    transition: 300ms ease-in-out;
+    background-color: #f18701;
 }
+
+.page-icon {
+    color: #fdfcdc;
+}
+
 

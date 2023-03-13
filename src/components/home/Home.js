@@ -12,11 +12,10 @@ const Home = () => {
             <h3 className="sub-heading">
               Looking to for your new friend for life? Start your search today!
             </h3>
-            {/* <button className="home-btn"> */}
+
             <Link to="filter" spy={true} smooth={true} duration={500}>
               <button className="home-btn">Start Search</button>
             </Link>
-            {/* </button> */}
           </div>
         </div>
         <div className="home-right-container">

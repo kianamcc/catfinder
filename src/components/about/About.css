@@ -1,0 +1,75 @@
+.about {
+    margin-bottom: 0px;
+    background-color: #fff3b0;
+}
+
+
+.about-title {
+    text-align: center;
+    font-size: 2.5rem;
+    border-bottom: 5px #ff9770 solid;
+}
+
+.about-text {
+    font-size: 1.5rem; 
+}
+
+
+.about-us-bkg {
+    background-color: #ff9770;
+}
+
+.about-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.about-us-container {
+    height: 40vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    
+}
+
+.about-flex-item {
+    /* flex: 1; */
+    padding: 40px 100px 0px 100px;
+
+}
+
+.about-flex-item:nth-child(2) {
+    /* flex: 1; */
+    padding: 0px 100px 0px 100px;
+
+}
+
+.about-who-container, .about-mission-container {
+    display: flex;
+    align-items: center;
+    gap: 50px
+}
+
+.about-who-img, .about-mission-img {
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.about-who-left, .about-mission-right {
+    flex: 1.5;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+
+
+.about-who-right, .about-mission-left {
+    flex: 1
+}
+
+.about-mission-container {
+    height: 100vh;
+}
