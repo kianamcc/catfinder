@@ -63,7 +63,7 @@ const Donate = () => {
             >
               Best Friends Animal Society
             </a>
-            <IoPawSharp size={40} className="donate-pawprint" />
+            <IoPawSharp className="donate-pawprint" />
           </li>
           <li className="donate-link-item">
             <a
@@ -74,7 +74,7 @@ const Donate = () => {
             >
               The Humane Society of The United States
             </a>
-            <IoPawSharp size={40} className="donate-pawprint" />
+            <IoPawSharp className="donate-pawprint" />
           </li>
           <li className="donate-link-item">
             <a
@@ -85,7 +85,7 @@ const Donate = () => {
             >
               American Humane
             </a>
-            <IoPawSharp size={40} className="donate-pawprint" />
+            <IoPawSharp className="donate-pawprint" />
           </li>
           <li className="donate-link-item">
             <a
@@ -96,7 +96,7 @@ const Donate = () => {
             >
               PetSmart Charities
             </a>
-            <IoPawSharp size={40} className="donate-pawprint" />
+            <IoPawSharp className="donate-pawprint" />
           </li>
           <li className="donate-link-item">
             <a
@@ -107,7 +107,7 @@ const Donate = () => {
             >
               Alley Cat Allies
             </a>
-            <IoPawSharp size={40} className="donate-pawprint" />
+            <IoPawSharp className="donate-pawprint" />
           </li>
         </ul>
       </div>

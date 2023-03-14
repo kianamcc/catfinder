@@ -61,8 +61,8 @@
  }
 
 .footer-icons {
-  height: 50px;
-  width: 50px;
+  height: 35px;
+  width: 35px;
   cursor: pointer;
 }
 
@@ -71,8 +71,28 @@
   gap: 20px;
 }
 
-@media only screen and (max-width: 480px) {
-  .footer {
-    padding: 0px 0px 20px 0px;
-  }
+
+@media only screen and (max-width: 768px) {
+   .footer-columns {
+      flex-direction: column;
+      gap: 20px;
+    }
 }
+
+@media only screen and (max-width: 480px) {
+   .footer-columns {
+      flex-direction: column;
+      gap: 20px;
+    }
+}
+
+@media only screen and (max-width: 320px) {
+   .footer-columns {
+      font-size: 0.9rem;
+   }
+
+   .footer-columns {
+      flex-direction: column;
+      gap: 10px;
+    }
+ }

@@ -28,6 +28,12 @@ const Footer = () => {
               </ul>
             </div>
             <div className="footer-column">
+              <h3>News</h3>
+              <ul>
+                <li>Stay Updated</li>
+              </ul>
+            </div>
+            <div className="footer-column">
               <h3>Connect With Us</h3>
               <ul className="social-icons-container">
                 <li>
@@ -36,12 +42,6 @@ const Footer = () => {
                 <li>
                   <BsInstagram className="footer-icons" />
                 </li>
-              </ul>
-            </div>
-            <div className="footer-column">
-              <h3>News</h3>
-              <ul>
-                <li>Stay Updated</li>
               </ul>
             </div>
           </div>
