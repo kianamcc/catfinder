@@ -9,23 +9,23 @@ const Favorites = (props) => {
   const getFavoriteCats = localStorage.getItem("catfinder-favorites");
   const cats = JSON.parse(getFavoriteCats) || [];
 
-  console.log("favorite cats", cats.favorites);
+  console.log("favorite cats", cats);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [catsPerPage] = useState(5);
+  //const [numberOfPages, setNumberOfPages] = useState(0);
 
   let indexOfLastPost = currentPage * catsPerPage;
   let indexOfFirstPost = indexOfLastPost - catsPerPage;
   let currentCats = [];
 
-  if (cats.favorites) {
-    currentCats = cats.favorites.slice(indexOfFirstPost, indexOfLastPost);
-  }
+  const [pageNumberLimit, setPageNumberLimit] = useState(3);
+  const [minPageNumber, setMinPageNumber] = useState(1);
+  const [maxPageNumber, setMaxPageNumber] = useState(3);
 
-  // let favoriteCurrentCats = cats.favorites.slice(
-  //   indexOfFirstPost,
-  //   indexOfLastPost
-  // );
+  if (cats) {
+    currentCats = cats.slice(indexOfFirstPost, indexOfLastPost);
+  }
 
   const handlePageClick = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -104,11 +104,17 @@ const Favorites = (props) => {
           })}
         </div>
       </section>
-      <Pagination
-        totalCats={cats.length}
-        catsPerPage={catsPerPage}
-        handlePageClick={handlePageClick}
-      />
+      {cats.length > catsPerPage ? (
+        <Pagination
+          totalCats={cats.length}
+          catsPerPage={catsPerPage}
+          handlePageClick={handlePageClick}
+          numberOfPages={5}
+          pageNumberLimit={pageNumberLimit}
+          minPageNumber={minPageNumber}
+          maxPageNumber={maxPageNumber}
+        />
+      ) : null}
     </>
   );
 

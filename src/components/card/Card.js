@@ -5,7 +5,7 @@ import { MdEmail, MdLocationOn } from "react-icons/md";
 import "./Card.css";
 
 const Card = (props) => {
-  console.log("cards ", props.currentCats);
+  // console.log("cards ", props.currentCats);
 
   return (
     <section className="card-container">

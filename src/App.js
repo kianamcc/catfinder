@@ -18,7 +18,13 @@ const { REACT_APP_API_KEY, REACT_APP_SECRET_KEY } = process.env;
 
 const App = () => {
   const [favoriteCats, setFavoriteCats] = useState([]);
+
   const [currentPage, setCurrentPage] = useState(1);
+  // new
+  const [pageNumberLimit, setPageNumberLimit] = useState(3);
+  const [minPageNumber, setMinPageNumber] = useState(1);
+  const [maxPageNumber, setMaxPageNumber] = useState(3);
+
   const [catsPerPage] = useState(25);
   const [token, setToken] = useState("");
   const [error, setError] = useState(false);
@@ -31,6 +37,10 @@ const App = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    const catFavorites = localStorage.getItem("catfinder-favorites");
+    const output = JSON.parse(catFavorites) || [];
+    setFavoriteCats(output);
+
     axios
       .post(
         "https://api.petfinder.com/v2/oauth2/token", // token request, must be POST, contains single parameter and values named grant_type
@@ -50,7 +60,6 @@ const App = () => {
               }
             )
             .then((response) => {
-              console.log(`data of page: ${page}`, response.data.animals);
               const catsWithImage = response.data.animals.filter((c) => {
                 return c.primary_photo_cropped != null;
               });
@@ -73,35 +82,21 @@ const App = () => {
       .catch((error) => {
         console.log("Error fetching access token! ", error);
       });
-
-    // Get favorite cats
-    const getFavoriteCats = localStorage.getItem("catfinder-favorites");
-    const result = JSON.parse(getFavoriteCats) || [];
-    console.log("local storage cards: ", result.cards);
   }, [currentPage]);
 
   useEffect(() => {
     setCurrentCats(catData.slice(indexOfFirstPost, indexOfLastPost));
   }, [catData]);
 
-  /* SET PAGE UPON USER CLICK */
-  const handlePageClick = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
-
   /* STORAGE HANDLING */
   const saveToLocalStorage = (items) => {
-    const localStorageObj = {
-      favorites: items,
-      //cards: catData,
-    };
+    // const localStorageObj = {
+    //   favorites: [items],
+    //   //cards: catData,
+    // };
 
-    console.log("local storage", localStorageObj);
-
-    localStorage.setItem(
-      "catfinder-favorites",
-      JSON.stringify(localStorageObj)
-    );
+    console.log("local storage object", items);
+    localStorage.setItem("catfinder-favorites", JSON.stringify(items));
   };
 
   /* FAVORITES */
@@ -119,6 +114,8 @@ const App = () => {
       }
       return currentFav;
     });
+
+    console.log("test", updateIsFavorite);
 
     // Update isFavorite property of favorited cat in main
     setCatData((prev) =>
@@ -182,11 +179,28 @@ const App = () => {
     return 0;
   };
 
-  console.log("loading", isFilterLoading);
+  /* PAGE HANDLING */
+  const handlePageClick = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const handleNextPage = () => {
+    setCurrentPage((prev) => prev + 1);
+    if (currentPage + 1 > maxPageNumber) {
+      setMaxPageNumber(maxPageNumber + pageNumberLimit);
+      setMinPageNumber(minPageNumber + pageNumberLimit);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage((prev) => prev - 1);
+    }
+    // if ()
+  };
 
   /* CHECK STATES, CONSOLE.LOGs */
-  console.log("current cats: ", currentCats);
-  console.log(catData.length);
+  //console.log("current cats: ", currentCats);
 
   return (
     <div className="App">
@@ -213,6 +227,13 @@ const App = () => {
                   totalCats={catData.length}
                   catsPerPage={catsPerPage}
                   handlePageClick={handlePageClick}
+                  numberOfPages={5}
+                  currentPage={currentPage}
+                  handleNextPage={handleNextPage}
+                  handlePreviousPage={handlePreviousPage}
+                  pageNumberLimit={pageNumberLimit}
+                  minPageNumber={minPageNumber}
+                  maxPageNumber={maxPageNumber}
                 />
               </Fragment>
             }

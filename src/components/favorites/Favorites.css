@@ -12,3 +12,10 @@
     text-align: center;
     padding-top: 20vh;
 }
+
+@media only screen and (max-width: 480px) {
+    .no-favorites-container {
+        font-size: 1.5rem;
+    }
+    
+}
