@@ -1,6 +1,5 @@
 import React from "react";
 import "./Donate.css";
-import kittens from "../../assets/kittens.jpg";
 import { BiHomeHeart } from "react-icons/bi";
 import { MdOutlineMedicalServices } from "react-icons/md";
 import { GiCannedFish } from "react-icons/gi";

@@ -1,6 +1,5 @@
 .card-container {
   /* padding: 0px 0px 20px 0px; */
-  
 }
 
 .heart-fill-icon {
@@ -12,7 +11,9 @@
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 60vh;
+  padding: 1em;
+  
 }
 
 .heart-icon-container {
@@ -20,20 +21,21 @@
 }
 
 .card-img-container {
-  padding: 0px 10px;
-  height: 60%;
+  /* padding: 0px 1em; */
+  height: 54%;
+  margin: 0.5em 0;
 }
 
 .card-img {
   border-radius: 10px;
   height: 100%;
   width: 100%;
+
 }
 
 .card-top {
   display: flex;
   align-items: center;
-  padding: 5px 10px;
 }
 
 .card-top div {
@@ -44,10 +46,48 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  overflow-y: scroll;
+  /* flex-wrap: wrap; */
   gap: 5px;
-  padding: 5px;
+  overflow: hidden;
+  overflow-wrap: break-word;
 }
 
+.card-phone {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.card-email {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.card-email-link {
+  text-decoration: none;
+  color: #432818;
+}
+
+.card-email-link:hover {
+  text-decoration: none;
+  color: #fefae0;
+}
+
+.card-description {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  overflow-y: scroll;
+  line-height: 1.5em;
+}
+
+.card-email {
+  word-break: break-all;
+}
 .card-hashtags {
   display: flex;
   flex: 1;
@@ -68,12 +108,16 @@
   margin-right: 5px;
 }
 
-@media only screen and (max-width: 320px) {
+.icons {
+  /* height: 16px;
+  width: 16px; */
+}
 
+
+@media only screen and (max-width: 320px) {
   .card-grid-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, 250px);
-
   }
   .card-bottom {
     font-size: 0.9rem;

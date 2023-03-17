@@ -1,6 +1,5 @@
 import React from "react";
 import "./About.css";
-import cat from "../../assets/cat.jpg";
 import catWhoImg from "../../assets/cat-about-1.jpg";
 import catMissionImg from "../../assets/cat-about-0.jpg";
 import { Fade } from "react-awesome-reveal";

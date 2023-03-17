@@ -1,6 +1,8 @@
 .filter-container {
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .filter-inner-container {
@@ -29,6 +31,14 @@
     border: none;
     background: none;
     cursor: pointer;
+    padding-left: 5px;
+}
+
+.input-error-container {
+  color: #ae2012;
+  font-weight: 800;
+  padding: 10px;
+  
 }
 
 

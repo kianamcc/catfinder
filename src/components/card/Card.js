@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { MdEmail, MdLocationOn } from "react-icons/md";
 import "./Card.css";
 
 const Card = (props) => {
-  //console.log("currentcats", props.currentCats);
+  console.log("cards ", props.currentCats);
 
   return (
     <section className="card-container">
@@ -17,7 +17,6 @@ const Card = (props) => {
                 <div className="card-top">
                   <h3>{cat.name}</h3>
                   <div className="heart-icon-container">
-                    {/* {console.log(cat.name, "is fave?: ", cat.isFavorite)} */}
                     {cat.isFavorite ? (
                       <AiFillHeart
                         className="heart-fill-icon"
@@ -37,7 +36,16 @@ const Card = (props) => {
                   </div>
                 </div>
                 <div className="card-img-container">
-                  <img className="card-img" src={cat.src} alt="card-img" />
+                  {/* <img className="card-img" src={cat.src} alt="card-img" /> */}
+                  <img
+                    className="card-img"
+                    src={
+                      cat && cat.primary_photo_cropped
+                        ? cat.primary_photo_cropped["small"]
+                        : null
+                    }
+                    alt="Cat"
+                  />
                 </div>
                 <div className="card-bottom">
                   <div className="card-description">
@@ -47,17 +55,37 @@ const Card = (props) => {
                     {cat.description}
                   </div>
                   <div className="card-location">
-                    <MdLocationOn /> 9 miles away
+                    {cat.distance && (
+                      <>
+                        <MdLocationOn className="icons" /> {cat.distance} miles
+                        away
+                      </>
+                    )}
                   </div>
 
                   <div className="card-phone">
-                    <BsFillTelephoneFill /> {cat.phone}
+                    {cat.contact.phone && (
+                      <>
+                        <BsFillTelephoneFill className="icons" />{" "}
+                        {cat.contact.phone}
+                      </>
+                    )}
                   </div>
                   <div className="card-email">
-                    <MdEmail /> {cat.email}
+                    {cat.contact.email && (
+                      <>
+                        <MdEmail className="icons" />
+                        <a
+                          href={`mailto:${cat.contact.email}`}
+                          className="card-email-link"
+                        >
+                          {cat.contact.email}
+                        </a>
+                      </>
+                    )}
                   </div>
                   <div className="card-hashtags">
-                    {cat.tags.map((tag, index) => {
+                    {cat.tags.slice(0, 3).map((tag, index) => {
                       return <p key={`${cat.id}-${index}`}>#{tag}</p>;
                     })}
                   </div>
