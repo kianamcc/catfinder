@@ -11,7 +11,7 @@ const Filter = (props) => {
       <div className="filter-container">
         <div className="filter-inner-container">
           <input
-            placeholder="Enter your zipcode"
+            placeholder="Enter your zipcode, state, or city"
             type="text"
             className="filter-input-box"
             onChange={(e) => {

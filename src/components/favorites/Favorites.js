@@ -13,6 +13,7 @@ const Favorites = (props) => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [catsPerPage] = useState(5);
+
   //const [numberOfPages, setNumberOfPages] = useState(0);
 
   let indexOfLastPost = currentPage * catsPerPage;
@@ -62,14 +63,17 @@ const Favorites = (props) => {
                     />
                   </div>
                   <div className="card-bottom">
-                    <div className="card-description">
-                      <span className="organization-name">
-                        Name_of_Organization
-                      </span>
-                      {cat.description}
-                    </div>
+                    <div className="card-description">{cat.description}</div>
                     <div className="card-location">
-                      <MdLocationOn className="icons" /> 9 miles away
+                      <MdLocationOn className="icons" />{" "}
+                      <>
+                        {cat.contact.address.city && (
+                          <span>{cat.contact.address.city},</span>
+                        )}{" "}
+                        {cat.contact.address.state && (
+                          <span>{cat.contact.address.state}</span>
+                        )}
+                      </>
                     </div>
 
                     <div className="card-phone">
@@ -94,7 +98,7 @@ const Favorites = (props) => {
                     </div>
                     <div className="card-hashtags">
                       {cat.tags.slice(0, 3).map((tag, index) => {
-                        return <p key={`${cat.id}-${index}`}>#{tag}</p>;
+                        return <span key={`${cat.id}-${index}`}>#{tag}</span>;
                       })}
                     </div>
                   </div>
@@ -110,6 +114,9 @@ const Favorites = (props) => {
           catsPerPage={catsPerPage}
           handlePageClick={handlePageClick}
           numberOfPages={5}
+          currentPage={currentPage}
+          handleNextPage={props.handleNextPage}
+          handlePreviousPage={props.handlePreviousPage}
           pageNumberLimit={pageNumberLimit}
           minPageNumber={minPageNumber}
           maxPageNumber={maxPageNumber}

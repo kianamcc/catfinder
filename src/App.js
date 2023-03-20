@@ -13,6 +13,7 @@ import { Fragment, useEffect, useState } from "react";
 //import data from "./data.js";
 import Pagination from "./components/pagination/Pagination";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { FadeLoader } from "react-spinners";
 
 const { REACT_APP_API_KEY, REACT_APP_SECRET_KEY } = process.env;
 
@@ -31,35 +32,63 @@ const App = () => {
   const [catData, setCatData] = useState([]);
   const [currentCats, setCurrentCats] = useState([]);
   const [isFilterLoading, setIsFilterLoading] = useState(false);
+  const [catDataLoading, setCatDataLoading] = useState(false);
+
+  // new
+  const [location, setLocation] = useState(false);
+  const [input, setInput] = useState("");
+  const [clicked, setClicked] = useState(false);
 
   let indexOfLastPost = currentPage * catsPerPage;
   let indexOfFirstPost = indexOfLastPost - catsPerPage;
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    // window.scrollTo(0, 0);
     const catFavorites = localStorage.getItem("catfinder-favorites");
     const output = JSON.parse(catFavorites) || [];
     setFavoriteCats(output);
 
+    setCatDataLoading(true);
+
+    if (clicked) {
+      setIsFilterLoading(true);
+    }
+
+    setError(false);
+
     axios
       .post(
-        "https://api.petfinder.com/v2/oauth2/token", // token request, must be POST, contains single parameter and values named grant_type
+        "https://api.petfinder.com/v2/oauth2/token",
         `grant_type=client_credentials&client_id=${REACT_APP_API_KEY}&client_secret=${REACT_APP_SECRET_KEY}`
       )
 
       .then((response) => {
         let accessT = response.data.access_token;
         setToken(accessT);
+        setCatDataLoading(false);
+        console.log("main use effect");
+        // setError(false); //
+        setIsFilterLoading(false);
+
+        let url = "";
 
         for (let page = 1; page <= 2; page++) {
+          // new
+          if (input) {
+            url = `https://api.petfinder.com/v2/animals?type=cat&limit=100&location=${input}`;
+            console.log("input", input);
+          } else {
+            url = `https://api.petfinder.com/v2/animals?type=cat&limit=100&page=${page}`;
+            console.log("no input");
+          }
+          //
           axios
-            .get(
-              `https://api.petfinder.com/v2/animals?type=cat&limit=100&page=${page}`,
-              {
-                headers: { Authorization: `Bearer ${accessT}` },
-              }
-            )
+            .get(url, {
+              headers: { Authorization: `Bearer ${accessT}` },
+            })
             .then((response) => {
+              //
+              console.log("use", response);
               const catsWithImage = response.data.animals.filter((c) => {
                 return c.primary_photo_cropped != null;
               });
@@ -70,23 +99,26 @@ const App = () => {
                 }
                 return x;
               });
-
-              setCatData((prev) => [...prev, ...catsWithIsFavoriteProperty]);
+              setCatData(catsWithIsFavoriteProperty);
+              //setCatData((prev) => [...prev, ...catsWithIsFavoriteProperty]);
             })
 
             .catch((error) => {
               console.log("Error fetching data", error);
+              setIsFilterLoading(false);
+              setError(true);
             });
         }
       })
       .catch((error) => {
         console.log("Error fetching access token! ", error);
+        setError(true);
       });
-  }, [currentPage]);
+  }, [location, clicked]);
 
   useEffect(() => {
     setCurrentCats(catData.slice(indexOfFirstPost, indexOfLastPost));
-  }, [catData]);
+  }, [catData, currentPage]);
 
   /* STORAGE HANDLING */
   const saveToLocalStorage = (items) => {
@@ -154,33 +186,18 @@ const App = () => {
 
   /* LOCATION HANDLING */
   const locationHandler = (userInput) => {
-    setIsFilterLoading(true);
-    axios
-      .get(
-        `https://api.petfinder.com/v2/animals?type=cat&location=${userInput}`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
-      .then((res) => {
-        console.log("location", res);
-        setError(false);
-        const filteredCatData = res.data.animals.filter((c) => {
-          return c.primary_photo_cropped != null;
-        });
-        setCatData(filteredCatData);
-        setIsFilterLoading(false);
-      })
-      .catch((err) => {
-        console.log("Error occurred in search input: ", err);
-        setIsFilterLoading(false);
-        setError(true);
-      });
-    return 0;
+    setClicked((prev) => !prev);
+    if (userInput) {
+      setLocation(true);
+    } else {
+      setLocation(false);
+    }
+    setInput(userInput);
   };
 
   /* PAGE HANDLING */
   const handlePageClick = (pageNumber) => {
+    console.log("test", pageNumber);
     setCurrentPage(pageNumber);
   };
 
@@ -218,11 +235,19 @@ const App = () => {
                   error={error}
                   isFilterLoading={isFilterLoading}
                 />
-                <Card
-                  currentCats={currentCats}
-                  handleFavorites={handleFavorites}
-                  handleRemoveFavorites={handleRemoveFavorites}
-                />
+
+                {catDataLoading ? (
+                  <div className="data-loading-container">
+                    <h2 className="data-loading">Loading cats...</h2>
+                    <FadeLoader color="#ffbe0b" size={10} />
+                  </div>
+                ) : (
+                  <Card
+                    currentCats={currentCats}
+                    handleFavorites={handleFavorites}
+                    handleRemoveFavorites={handleRemoveFavorites}
+                  />
+                )}
                 <Pagination
                   totalCats={catData.length}
                   catsPerPage={catsPerPage}
@@ -244,7 +269,6 @@ const App = () => {
             path="/favorites"
             element={
               <Favorites
-                //currentCats={favoriteCurrentCats}
                 handleFavorites={handleFavorites}
                 handleRemoveFavorites={handleRemoveFavorites}
                 favoriteCats={favoriteCats}

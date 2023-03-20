@@ -34,11 +34,9 @@
 }
 
 
-
 .page-icon {
     color: #fdfcdc;
 }
-
 
 .page-number-item {
     list-style: none;
@@ -48,7 +46,6 @@
 .page-number-item-active  {
     list-style: none;
     text-decoration: none;
-
 }
 
 .page-number-item-active .page-btn {

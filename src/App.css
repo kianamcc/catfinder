@@ -1,14 +1,25 @@
 .App {
   box-sizing: border-box;
- font-family: 'Mali', sans-serif;
-  background-color: #FEFAE0;
+  font-family: "Mali", sans-serif;
+  background-color: #fefae0;
   color: #432818;
   scroll-behavior: smooth;
 }
 
 section {
   padding: 0px 0px 50px 0px;
-  background-color: #FEFAE0;
+  background-color: #fefae0;
+}
+
+.data-loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 20px;
+}
+.data-loading {
+  text-align: center;
 }
 
 html,
@@ -19,7 +30,11 @@ body,
   margin: 0;
 }
 
-h1, h2, h3, p, a {
+h1,
+h2,
+h3,
+p,
+a {
   padding: 0;
   margin: 0;
 }
@@ -29,4 +44,3 @@ h1, h2, h3, p, a {
     padding: 0px 0px 40px 0px;
   }
 }
-

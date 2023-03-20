@@ -2,6 +2,7 @@ import React from "react";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { MdEmail, MdLocationOn } from "react-icons/md";
+import { FaInfoCircle } from "react-icons/fa";
 import "./Card.css";
 
 const Card = (props) => {
@@ -36,7 +37,6 @@ const Card = (props) => {
                   </div>
                 </div>
                 <div className="card-img-container">
-                  {/* <img className="card-img" src={cat.src} alt="card-img" /> */}
                   <img
                     className="card-img"
                     src={
@@ -48,17 +48,28 @@ const Card = (props) => {
                   />
                 </div>
                 <div className="card-bottom">
-                  <div className="card-description">
-                    <span className="organization-name">
-                      Name_of_Organization
-                    </span>
-                    {cat.description}
-                  </div>
+                  <div className="card-description">{cat.description}</div>
                   <div className="card-location">
-                    {cat.distance && (
+                    {cat.distance ? (
                       <>
-                        <MdLocationOn className="icons" /> {cat.distance} miles
-                        away
+                        <MdLocationOn className="icons" />
+                        <span>{cat.distance} miles away in </span>
+                        {cat.contact.address.city && (
+                          <span>{cat.contact.address.city},</span>
+                        )}{" "}
+                        {cat.contact.address.state && (
+                          <span>{cat.contact.address.state}</span>
+                        )}
+                      </>
+                    ) : (
+                      <>
+                        <MdLocationOn className="icons" />
+                        {cat.contact.address.city && (
+                          <span>{cat.contact.address.city},</span>
+                        )}{" "}
+                        {cat.contact.address.state && (
+                          <span>{cat.contact.address.state}</span>
+                        )}
                       </>
                     )}
                   </div>
@@ -84,9 +95,24 @@ const Card = (props) => {
                       </>
                     )}
                   </div>
+                  <div className="card-email">
+                    {cat.url && (
+                      <>
+                        <FaInfoCircle className="icons" />{" "}
+                        <a
+                          href={cat.url}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="card-email-link"
+                        >
+                          Learn more
+                        </a>
+                      </>
+                    )}
+                  </div>
                   <div className="card-hashtags">
                     {cat.tags.slice(0, 3).map((tag, index) => {
-                      return <p key={`${cat.id}-${index}`}>#{tag}</p>;
+                      return <span key={`${cat.id}-${index}`}>#{tag}</span>;
                     })}
                   </div>
                 </div>

@@ -13,14 +13,6 @@ const Pagination = (props) => {
   for (let i = 1; i <= Math.ceil(props.totalCats / props.catsPerPage); i++) {
     pageNumbers.push(i);
   }
-  // console.log("pages", pageNumbers);
-  // console.log("max", props.maxPageNumber);
-  // console.log("min", props.minPageNumber);
-  // console.log("current", props.currentPage);
-
-  // for (let i = 1; i <= props.numberOfPages; i++) {
-  //   pageNumbers.push(i);
-  // }
 
   const renderPages = pageNumbers.map((number) => {
     return number < props.maxPageNumber + 1 && number >= props.minPageNumber ? (
@@ -48,17 +40,20 @@ const Pagination = (props) => {
   return (
     <section className="pagination">
       <div className="pagination-container">
-        <BsFillArrowLeftCircleFill
-          className="arrow-icon"
-          onClick={props.handlePreviousPage}
-        />
+        <Link to="filter" spy={true} smooth={true} duration={500}>
+          <BsFillArrowLeftCircleFill
+            className="arrow-icon"
+            onClick={props.handlePreviousPage}
+          />
+        </Link>
 
         {renderPages}
-
-        <BsFillArrowRightCircleFill
-          className="arrow-icon"
-          onClick={props.handleNextPage}
-        />
+        <Link to="filter" spy={true} smooth={true} duration={500}>
+          <BsFillArrowRightCircleFill
+            className="arrow-icon"
+            onClick={props.handleNextPage}
+          />
+        </Link>
       </div>
     </section>
   );
