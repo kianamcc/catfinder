@@ -161,11 +161,9 @@
     width: 150px;
     padding: 5px;
   }
-  
 }
 
 @media only screen and (max-width: 640px) {
-  /*your CSS Rules*/
   .donate-perks {
     padding: 20px 0px 40px 0px;
     gap: 10px;

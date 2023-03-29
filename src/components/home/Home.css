@@ -5,7 +5,6 @@
 
 .home-title {
   font-size: 4.5rem;
-  
 }
 
 .home-container {
@@ -24,7 +23,6 @@
   flex-direction: column;
   padding: 110px 60px 0px 60px;
 }
-
 
 .home-right-container {
   flex: 1;
@@ -46,7 +44,7 @@
   letter-spacing: 2px;
   background-color: #ffbe0b;
   transition: 300ms ease-in-out;
-  font-family: 'Mali', sans-serif;
+  font-family: "Mali", sans-serif;
 }
 
 .home-btn:hover {
@@ -78,7 +76,7 @@
 @media only screen and (max-width: 640px) {
   .home-right-container {
     display: none;
-  }   
+  }
   .home-btn {
     width: 70vw;
   }
@@ -96,27 +94,19 @@
   .home-btn {
     width: 50vw;
   }
-
-
-
-}       
+}
 
 @media only screen and (max-width: 320px) {
-
   .home-title {
     font-size: 2.5rem;
-    
   }
 
   .home-left-flex-container {
     padding: 50px 40px 0px 40px;
   }
 
-
   .home-btn {
     width: 70vw;
-    font-size: 1rem
+    font-size: 1rem;
   }
-
 }
-

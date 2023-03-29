@@ -18,7 +18,6 @@ const Filter = (props) => {
               setUserInput(e.target.value);
             }}
           />
-
           {props.isFilterLoading ? (
             <PulseLoader color="#ffbe0b" size={10} />
           ) : (

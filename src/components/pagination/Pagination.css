@@ -1,89 +1,84 @@
 .pagination-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    font-size: 2rem;
-    gap: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 2rem;
+  gap: 20px;
 }
 
 .page-container {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .page-btn {
-    text-decoration: none;
-    color: #432818;
-    cursor: pointer;
-    padding: 15px;
-    border: 2px solid #d4a373;
-    font-size: 1.2rem;
-    background-color: #ffbe0b;
-    display: flex;
-    align-items: center;
-    gap: 3px;
-    font-weight: 600;
-    border-radius: 5px;
-    transition: 300ms ease-in-out;
+  text-decoration: none;
+  color: #432818;
+  cursor: pointer;
+  padding: 15px;
+  border: 2px solid #d4a373;
+  font-size: 1.2rem;
+  background-color: #ffbe0b;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-weight: 600;
+  border-radius: 5px;
+  transition: 300ms ease-in-out;
 }
 
 .page-btn:hover {
-    transition: 300ms ease-in-out;
-    background-color: #f18701;
+  transition: 300ms ease-in-out;
+  background-color: #f18701;
 }
 
-
 .page-icon {
-    color: #fdfcdc;
+  color: #fdfcdc;
 }
 
 .page-number-item {
-    list-style: none;
-    display: flex;
+  list-style: none;
+  display: flex;
 }
 
-.page-number-item-active  {
-    list-style: none;
-    text-decoration: none;
+.page-number-item-active {
+  list-style: none;
+  text-decoration: none;
 }
 
 .page-number-item-active .page-btn {
-    background-color: #f26e0d;
+  background-color: #f26e0d;
 }
 
 .arrow-icon {
-    color: #ffbe0b; 
-    width: 45px;
-    height: 45px;
-    background: none;
-    cursor: pointer;
-    transition: 300ms ease-in-out;
+  color: #ffbe0b;
+  width: 45px;
+  height: 45px;
+  background: none;
+  cursor: pointer;
+  transition: 300ms ease-in-out;
 }
 
 .arrow-icon:hover {
-    color: #f18701;
-    transition: 300ms ease-in-out;
+  color: #f18701;
+  transition: 300ms ease-in-out;
 }
 
-
 @media only screen and (max-width: 320px) {
+  .page-btn {
+    padding: 5px;
+    font-size: 1rem;
+    background-color: #ffbe0b;
+  }
 
-    .page-btn {
-        padding: 5px;
-        font-size: 1rem;
-        background-color: #ffbe0b;
-    }
+  .arrow-icon {
+    color: #ffbe0b;
+    width: 35px;
+    height: 35px;
+  }
 
-    .arrow-icon {
-        color: #ffbe0b; 
-        width: 35px;
-        height: 35px;
-    }
-
-    .pagination-container {
-        gap: 15px;
-    }
-    
-    
+  .pagination-container {
+    gap: 15px;
+  }
 }

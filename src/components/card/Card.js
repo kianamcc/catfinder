@@ -6,8 +6,6 @@ import { FaInfoCircle } from "react-icons/fa";
 import "./Card.css";
 
 const Card = (props) => {
-  // console.log("cards ", props.currentCats);
-
   return (
     <section className="card-container">
       <div className="card-grid-container">

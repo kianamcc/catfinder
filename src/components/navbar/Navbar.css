@@ -1,73 +1,67 @@
 .navbar {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 .nav-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 40px;
 }
 
-
 .navbar-logo {
-    height: 100%;
-    width: 20vw;
+  height: 100%;
+  width: 20vw;
 }
 
 .nav-links-container {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    flex-grow: 1;
-    font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-grow: 1;
+  font-weight: 600;
 }
 
 .nav-link-item-container {
-    list-style: none;
-    cursor: pointer;
+  list-style: none;
+  cursor: pointer;
 }
 
 .nav-link {
-    text-decoration: none;
-    color: #432818;
-    font-size: 1.3rem;
+  text-decoration: none;
+  color: #432818;
+  font-size: 1.3rem;
 }
 
 .nav-link:hover {
-    color: orange;
-    border-bottom: 2px orange solid;
+  color: orange;
+  border-bottom: 2px orange solid;
 }
 
-
 .favorites-link {
-    margin-left: auto;
-    border: none;
-    background-color:  #ffbe0b;
-    border-radius: 15px;
-    letter-spacing: 1.5px;
+  margin-left: auto;
+  border: none;
+  background-color: #ffbe0b;
+  border-radius: 15px;
+  letter-spacing: 1.5px;
 }
 
 .fav-link {
-    padding: 10px;
-    display: block;
-    color: white;
-    
+  padding: 10px;
+  display: block;
+  color: white;
 }
 
 .favorites-link {
-    transition: 300ms ease-in-out;
+  transition: 300ms ease-in-out;
 }
 
 .favorites-link:hover {
-    
-    transition: 300ms ease-in-out;
-    transform: scale(1.15);
+  transition: 300ms ease-in-out;
+  transform: scale(1.15);
 }
 
 .fav-link:hover {
-    color: white;
-    border: none;
+  color: white;
+  border: none;
 }
-
-

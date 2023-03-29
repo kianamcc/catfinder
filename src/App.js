@@ -19,35 +19,28 @@ const { REACT_APP_API_KEY, REACT_APP_SECRET_KEY } = process.env;
 
 const App = () => {
   const [favoriteCats, setFavoriteCats] = useState([]);
-
-  const [currentPage, setCurrentPage] = useState(1);
-  // new
-  const [pageNumberLimit, setPageNumberLimit] = useState(3);
-  const [minPageNumber, setMinPageNumber] = useState(1);
-  const [maxPageNumber, setMaxPageNumber] = useState(3);
-
-  const [catsPerPage] = useState(25);
-  const [token, setToken] = useState("");
   const [error, setError] = useState(false);
   const [catData, setCatData] = useState([]);
   const [currentCats, setCurrentCats] = useState([]);
   const [isFilterLoading, setIsFilterLoading] = useState(false);
   const [catDataLoading, setCatDataLoading] = useState(false);
-
-  // new
   const [location, setLocation] = useState(false);
   const [input, setInput] = useState("");
   const [clicked, setClicked] = useState(false);
+  /* Hooks for Pagination */
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageNumberLimit, setPageNumberLimit] = useState(3);
+  const [minPageNumber, setMinPageNumber] = useState(1);
+  const [maxPageNumber, setMaxPageNumber] = useState(3);
+  const [catsPerPage] = useState(25);
 
   let indexOfLastPost = currentPage * catsPerPage;
   let indexOfFirstPost = indexOfLastPost - catsPerPage;
 
   useEffect(() => {
-    // window.scrollTo(0, 0);
     const catFavorites = localStorage.getItem("catfinder-favorites");
     const output = JSON.parse(catFavorites) || [];
     setFavoriteCats(output);
-
     setCatDataLoading(true);
 
     if (clicked) {
@@ -64,31 +57,23 @@ const App = () => {
 
       .then((response) => {
         let accessT = response.data.access_token;
-        setToken(accessT);
         setCatDataLoading(false);
-        console.log("main use effect");
-        // setError(false); //
         setIsFilterLoading(false);
 
         let url = "";
 
         for (let page = 1; page <= 2; page++) {
-          // new
           if (input) {
             url = `https://api.petfinder.com/v2/animals?type=cat&limit=100&location=${input}`;
             console.log("input", input);
           } else {
             url = `https://api.petfinder.com/v2/animals?type=cat&limit=100&page=${page}`;
-            console.log("no input");
           }
-          //
           axios
             .get(url, {
               headers: { Authorization: `Bearer ${accessT}` },
             })
             .then((response) => {
-              //
-              console.log("use", response);
               const catsWithImage = response.data.animals.filter((c) => {
                 return c.primary_photo_cropped != null;
               });
@@ -100,7 +85,6 @@ const App = () => {
                 return x;
               });
               setCatData(catsWithIsFavoriteProperty);
-              //setCatData((prev) => [...prev, ...catsWithIsFavoriteProperty]);
             })
 
             .catch((error) => {
@@ -122,11 +106,6 @@ const App = () => {
 
   /* STORAGE HANDLING */
   const saveToLocalStorage = (items) => {
-    // const localStorageObj = {
-    //   favorites: [items],
-    //   //cards: catData,
-    // };
-
     console.log("local storage object", items);
     localStorage.setItem("catfinder-favorites", JSON.stringify(items));
   };
@@ -213,11 +192,7 @@ const App = () => {
     if (currentPage > 1) {
       setCurrentPage((prev) => prev - 1);
     }
-    // if ()
   };
-
-  /* CHECK STATES, CONSOLE.LOGs */
-  //console.log("current cats: ", currentCats);
 
   return (
     <div className="App">
@@ -276,7 +251,6 @@ const App = () => {
             }
           />
         </Routes>
-
         <Footer />
       </Router>
     </div>

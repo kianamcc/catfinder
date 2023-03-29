@@ -9,12 +9,8 @@ const Favorites = (props) => {
   const getFavoriteCats = localStorage.getItem("catfinder-favorites");
   const cats = JSON.parse(getFavoriteCats) || [];
 
-  console.log("favorite cats", cats);
-
   const [currentPage, setCurrentPage] = useState(1);
   const [catsPerPage] = useState(5);
-
-  //const [numberOfPages, setNumberOfPages] = useState(0);
 
   let indexOfLastPost = currentPage * catsPerPage;
   let indexOfFirstPost = indexOfLastPost - catsPerPage;

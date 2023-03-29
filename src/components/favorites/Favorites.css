@@ -1,21 +1,20 @@
 .favorites-container {
-    height: 100%;
-    background-color: #FEFAE0;
+  height: 100%;
+  background-color: #fefae0;
 }
 
 .no-favorites {
-    height: 100vh;
+  height: 100vh;
 }
 
 .no-favorites-container {
-    font-size: 1.5rem;
-    text-align: center;
-    padding-top: 20vh;
+  font-size: 1.5rem;
+  text-align: center;
+  padding-top: 20vh;
 }
 
 @media only screen and (max-width: 480px) {
-    .no-favorites-container {
-        font-size: 1.5rem;
-    }
-    
+  .no-favorites-container {
+    font-size: 1.5rem;
+  }
 }
