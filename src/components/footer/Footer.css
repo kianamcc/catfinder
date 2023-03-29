@@ -49,11 +49,11 @@
   padding: 0;
   margin: 0;
   text-align: center;
-  cursor: pointer;
 }
 
 .footer-column ul li {
    padding: 5px 0px;
+   cursor: pointer;
  }
 
 .footer-column ul li:hover {

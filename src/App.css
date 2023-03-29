@@ -11,6 +11,11 @@ section {
   background-color: #fefae0;
 }
 
+section:last-child {
+  padding: 0px;
+  background-color: #fefae0;
+}
+
 .data-loading-container {
   display: flex;
   justify-content: center;
