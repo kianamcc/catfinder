@@ -11,7 +11,7 @@
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  height: 60vh;
+  height: 70vh;
   padding: 1em;
 }
 
@@ -20,8 +20,7 @@
 }
 
 .card-img-container {
-  /* padding: 0px 1em; */
-  height: 54%;
+  height: 50%;
   margin: 0.5em 0;
 }
 
@@ -44,11 +43,13 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  overflow-y: scroll;
-  /* flex-wrap: wrap; */
   gap: 5px;
-  overflow: hidden;
+
   overflow-wrap: break-word;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  overflow-y: scroll;
 }
 
 .card-phone {
@@ -81,6 +82,7 @@
   text-overflow: ellipsis;
   overflow-y: scroll;
   line-height: 1.5em;
+  /* min-height: 85px; */
 }
 
 .card-email {
@@ -91,6 +93,7 @@
   flex: 1;
   align-items: flex-end;
   gap: 2px;
+  flex-wrap: wrap;
 }
 
 .card-grid-container {
@@ -110,6 +113,21 @@
   height: 20px;
   width: 20px;
   padding-right: 5px;
+}
+
+@media only screen and (max-width: 960px) {
+  .card-item-container {
+    height: 60vh;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .card-description {
+    height: fit-content;
+  }
+  .card-item-container {
+    height: 70vh;
+  }
 }
 
 @media only screen and (max-width: 320px) {

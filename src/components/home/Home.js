@@ -4,7 +4,7 @@ import { Link } from "react-scroll";
 
 const Home = () => {
   return (
-    <section className="home">
+    <section className="home" id="home">
       <div className="home-container">
         <div className="home-left-container">
           <div className="home-left-flex-container">

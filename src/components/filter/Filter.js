@@ -5,7 +5,8 @@ import { PulseLoader } from "react-spinners";
 
 const Filter = (props) => {
   const [userInput, setUserInput] = useState("");
-
+  // let input = document.getElementsByClassName("filter-input-box");
+  // input.setAttribute("size", input.getAttribute("placeholder").length);
   return (
     <section className="filter" id="filter">
       <div className="filter-container">

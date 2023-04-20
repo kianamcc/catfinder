@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Pagination.css";
 import { IoPawSharp } from "react-icons/io5";
 import { Link } from "react-scroll";
@@ -8,13 +8,25 @@ import {
 } from "react-icons/bs";
 
 const Pagination = (props) => {
-  const pageNumbers = [];
+  const totalPages = Math.ceil(props.totalCats / props.catsPerPage);
+  // console.log("total pages", totalPages, "cats", props.totalCats);
 
-  for (let i = 1; i <= Math.ceil(props.totalCats / props.catsPerPage); i++) {
-    pageNumbers.push(i);
+  const pageNumbers = [];
+  for (let i = props.minPageNumber; i <= props.maxPageNumber; i++) {
+    if (i <= totalPages) {
+      pageNumbers.push(i);
+    }
   }
 
   const renderPages = pageNumbers.map((number) => {
+    // console.log(
+    //   "num",
+    //   number,
+    //   "max",
+    //   props.maxPageNumber,
+    //   "min",
+    //   props.minPageNumber
+    // );
     return number < props.maxPageNumber + 1 && number >= props.minPageNumber ? (
       <li
         key={number}
@@ -29,7 +41,7 @@ const Pagination = (props) => {
             className="page-btn"
             onClick={() => props.handlePageClick(number)}
           >
-            <span className="page-number"> {number}</span>
+            <span className="page-number">{number}</span>
             <IoPawSharp className="page-icon" />
           </button>
         </Link>
@@ -46,7 +58,7 @@ const Pagination = (props) => {
             onClick={props.handlePreviousPage}
           />
         </Link>
-
+        {/* {console.log("reee")} */}
         {renderPages}
         <Link to="filter" spy={true} smooth={true} duration={500}>
           <BsFillArrowRightCircleFill

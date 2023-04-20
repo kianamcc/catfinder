@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiFillHeart } from "react-icons/ai";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { MdEmail, MdLocationOn } from "react-icons/md";
@@ -10,7 +10,7 @@ const Favorites = (props) => {
   const cats = JSON.parse(getFavoriteCats) || [];
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [catsPerPage] = useState(5);
+  const [catsPerPage] = useState(10);
 
   let indexOfLastPost = currentPage * catsPerPage;
   let indexOfFirstPost = indexOfLastPost - catsPerPage;
@@ -20,9 +20,40 @@ const Favorites = (props) => {
   const [minPageNumber, setMinPageNumber] = useState(1);
   const [maxPageNumber, setMaxPageNumber] = useState(3);
 
+  const [totalCats, setTotalCats] = useState(0);
+
   if (cats) {
     currentCats = cats.slice(indexOfFirstPost, indexOfLastPost);
   }
+
+  const handleNextPage = () => {
+    // console.log(
+    //   "page click handler",
+    //   currentPage,
+    //   "ceil",
+    //   Math.ceil(cats.length / catsPerPage)
+    // );
+    if (currentPage < Math.ceil(cats.length / catsPerPage)) {
+      setCurrentPage((prev) => prev + 1);
+    }
+
+    if (
+      currentPage + 1 > maxPageNumber &&
+      currentPage + 1 < Math.ceil(cats.length / catsPerPage)
+    ) {
+      setMaxPageNumber(maxPageNumber + pageNumberLimit);
+      setMinPageNumber(minPageNumber + pageNumberLimit);
+    }
+  };
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage((prev) => prev - 1);
+    }
+    if (currentPage - 1 < minPageNumber && currentPage > 3) {
+      setMaxPageNumber(maxPageNumber - pageNumberLimit);
+      setMinPageNumber(minPageNumber - pageNumberLimit);
+    }
+  };
 
   const handlePageClick = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -111,8 +142,8 @@ const Favorites = (props) => {
           handlePageClick={handlePageClick}
           numberOfPages={5}
           currentPage={currentPage}
-          handleNextPage={props.handleNextPage}
-          handlePreviousPage={props.handlePreviousPage}
+          handleNextPage={handleNextPage}
+          handlePreviousPage={handlePreviousPage}
           pageNumberLimit={pageNumberLimit}
           minPageNumber={minPageNumber}
           maxPageNumber={maxPageNumber}

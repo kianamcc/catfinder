@@ -33,7 +33,7 @@ const App = () => {
   const [minPageNumber, setMinPageNumber] = useState(1);
   const [maxPageNumber, setMaxPageNumber] = useState(3);
   const [catsPerPage] = useState(25);
-
+  /* Cat Indexing */
   let indexOfLastPost = currentPage * catsPerPage;
   let indexOfFirstPost = indexOfLastPost - catsPerPage;
 
@@ -62,7 +62,7 @@ const App = () => {
 
         let url = "";
 
-        for (let page = 1; page <= 2; page++) {
+        for (let page = 1; page <= 3; page++) {
           if (input) {
             url = `https://api.petfinder.com/v2/animals?type=cat&limit=100&location=${input}`;
             console.log("input", input);
@@ -78,12 +78,13 @@ const App = () => {
                 return c.primary_photo_cropped != null;
               });
 
-              const catsWithIsFavoriteProperty = catsWithImage.map((x) => {
+              let catsWithIsFavoriteProperty = catsWithImage.map((x) => {
                 if (!("isFavorite" in x)) {
                   return { ...x, isFavorite: false };
                 }
                 return x;
               });
+
               setCatData(catsWithIsFavoriteProperty);
             })
 
@@ -106,7 +107,7 @@ const App = () => {
 
   /* STORAGE HANDLING */
   const saveToLocalStorage = (items) => {
-    console.log("local storage object", items);
+    // console.log("local storage object", items);
     localStorage.setItem("catfinder-favorites", JSON.stringify(items));
   };
 
@@ -125,8 +126,6 @@ const App = () => {
       }
       return currentFav;
     });
-
-    console.log("test", updateIsFavorite);
 
     // Update isFavorite property of favorited cat in main
     setCatData((prev) =>
@@ -176,13 +175,24 @@ const App = () => {
 
   /* PAGE HANDLING */
   const handlePageClick = (pageNumber) => {
-    console.log("test", pageNumber);
     setCurrentPage(pageNumber);
   };
 
   const handleNextPage = () => {
-    setCurrentPage((prev) => prev + 1);
-    if (currentPage + 1 > maxPageNumber) {
+    // console.log(
+    //   "page click handler",
+    //   currentPage,
+    //   "ceil",
+    //   Math.ceil(catData.length / catsPerPage)
+    // );
+    if (currentPage < Math.ceil(catData.length / catsPerPage)) {
+      setCurrentPage((prev) => prev + 1);
+    }
+
+    if (
+      currentPage + 1 > maxPageNumber &&
+      currentPage + 1 < Math.ceil(catData.length / catsPerPage)
+    ) {
       setMaxPageNumber(maxPageNumber + pageNumberLimit);
       setMinPageNumber(minPageNumber + pageNumberLimit);
     }
@@ -191,6 +201,10 @@ const App = () => {
   const handlePreviousPage = () => {
     if (currentPage > 1) {
       setCurrentPage((prev) => prev - 1);
+    }
+    if (currentPage - 1 < minPageNumber && currentPage > 3) {
+      setMaxPageNumber(maxPageNumber - pageNumberLimit);
+      setMinPageNumber(minPageNumber - pageNumberLimit);
     }
   };
 
