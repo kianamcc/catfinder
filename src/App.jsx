@@ -10,12 +10,11 @@ import Filter from "./components/filter/Filter";
 import Footer from "./components/footer/Footer";
 import axios from "axios";
 import { Fragment, useEffect, useState } from "react";
-//import data from "./data.js";
 import Pagination from "./components/pagination/Pagination";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { FadeLoader } from "react-spinners";
 
-const { REACT_APP_API_KEY, REACT_APP_SECRET_KEY } = process.env;
+const { VITE_APP_API_KEY, VITE_APP_SECRET_KEY } = import.meta.env;
 
 const App = () => {
   const [favoriteCats, setFavoriteCats] = useState([]);
@@ -52,7 +51,7 @@ const App = () => {
     axios
       .post(
         "https://api.petfinder.com/v2/oauth2/token",
-        `grant_type=client_credentials&client_id=${REACT_APP_API_KEY}&client_secret=${REACT_APP_SECRET_KEY}`
+        `grant_type=client_credentials&client_id=${VITE_APP_API_KEY}&client_secret=${VITE_APP_SECRET_KEY}`
       )
 
       .then((response) => {
@@ -65,7 +64,6 @@ const App = () => {
         for (let page = 1; page <= 3; page++) {
           if (input) {
             url = `https://api.petfinder.com/v2/animals?type=cat&limit=100&location=${input}`;
-            console.log("input", input);
           } else {
             url = `https://api.petfinder.com/v2/animals?type=cat&limit=100&page=${page}`;
           }
@@ -107,7 +105,6 @@ const App = () => {
 
   /* STORAGE HANDLING */
   const saveToLocalStorage = (items) => {
-    // console.log("local storage object", items);
     localStorage.setItem("catfinder-favorites", JSON.stringify(items));
   };
 
@@ -143,8 +140,6 @@ const App = () => {
 
   /* REMOVE FAVORITES */
   const handleRemoveFavorites = (cat) => {
-    console.log("Removing favorite");
-
     const filterUnfavorite = favoriteCats.filter(
       (currentFav) => currentFav.id !== cat.id
     );
@@ -179,12 +174,6 @@ const App = () => {
   };
 
   const handleNextPage = () => {
-    // console.log(
-    //   "page click handler",
-    //   currentPage,
-    //   "ceil",
-    //   Math.ceil(catData.length / catsPerPage)
-    // );
     if (currentPage < Math.ceil(catData.length / catsPerPage)) {
       setCurrentPage((prev) => prev + 1);
     }

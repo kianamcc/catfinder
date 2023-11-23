@@ -27,12 +27,6 @@ const Favorites = (props) => {
   }
 
   const handleNextPage = () => {
-    // console.log(
-    //   "page click handler",
-    //   currentPage,
-    //   "ceil",
-    //   Math.ceil(cats.length / catsPerPage)
-    // );
     if (currentPage < Math.ceil(cats.length / catsPerPage)) {
       setCurrentPage((prev) => prev + 1);
     }
