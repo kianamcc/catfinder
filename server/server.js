@@ -9,7 +9,6 @@ app.use(cors());
 
 const PORT = process.env.PORT || 5000;
 
-// console.log(process.env);
 const { API_BASE_URL, API_KEY, API_SECRET_KEY } = process.env;
 
 app.get("/", (req, res) => {

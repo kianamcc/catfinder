@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./Pagination.css";
 import { IoPawSharp } from "react-icons/io5";
 import { Link } from "react-scroll";
@@ -9,7 +9,6 @@ import {
 
 const Pagination = (props) => {
   const totalPages = Math.ceil(props.totalCats / props.catsPerPage);
-  // console.log("total pages", totalPages, "cats", props.totalCats);
 
   const pageNumbers = [];
   for (let i = props.minPageNumber; i <= props.maxPageNumber; i++) {
@@ -19,14 +18,6 @@ const Pagination = (props) => {
   }
 
   const renderPages = pageNumbers.map((number) => {
-    // console.log(
-    //   "num",
-    //   number,
-    //   "max",
-    //   props.maxPageNumber,
-    //   "min",
-    //   props.minPageNumber
-    // );
     return number < props.maxPageNumber + 1 && number >= props.minPageNumber ? (
       <li
         key={number}
@@ -58,7 +49,6 @@ const Pagination = (props) => {
             onClick={props.handlePreviousPage}
           />
         </Link>
-        {/* {console.log("reee")} */}
         {renderPages}
         <Link to="filter" spy={true} smooth={true} duration={500}>
           <BsFillArrowRightCircleFill
