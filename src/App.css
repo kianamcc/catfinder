@@ -1,19 +1,18 @@
 .App {
   box-sizing: border-box;
-  font-family: "Mali", sans-serif;
-  background-color: #fefae0;
+  font-family: "Poppins", sans-serif;
+  /* background-color: #fefae0; */
   color: #432818;
   scroll-behavior: smooth;
 }
 
 section {
-  padding: 0px 0px 50px 0px;
-  background-color: #fefae0;
+  margin: 50px 0px;
 }
 
-section:last-child {
-  padding: 0px;
-  background-color: #fefae0;
+section:first-of-type,
+section:last-of-type {
+  margin: 0px;
 }
 
 .data-loading-container {

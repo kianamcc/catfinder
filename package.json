@@ -16,6 +16,7 @@
     "react-router-dom": "^6.8.2",
     "react-scroll": "^1.8.9",
     "react-spinners": "^0.13.8",
+    "styled-components": "^6.1.1",
     "vite": "^5.0.2",
     "vite-tsconfig-paths": "^4.2.1",
     "web-vitals": "^2.1.4"
