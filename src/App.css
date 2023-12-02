@@ -1,7 +1,7 @@
 .App {
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
-  /* background-color: #fefae0; */
+  background-color: rgba(0, 0, 0, 0.01);
   color: #432818;
   scroll-behavior: smooth;
 }

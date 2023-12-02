@@ -14,12 +14,12 @@ export const FilterContainer = styled.section`
 `;
 
 export const InputBoxContainer = styled.div`
+  box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
   height: 50px;
   width: 50%;
-  background-color: #ffff;
   display: flex;
   align-items: center;
-  padding: 0px 10px;
 
   @media ${({ theme }) => theme.tablet} {
     width: 50%;
@@ -27,10 +27,9 @@ export const InputBoxContainer = styled.div`
 `;
 
 export const FilterInputBox = styled.input<{ props }>`
-  box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.1);
   font-size: 1.2rem;
   border: none;
-  border-radius: 10px;
+  border-radius: 10px 0px 0px 10px;
   height: 100%;
   width: 100%;
   text-indent: 5px;
@@ -49,7 +48,10 @@ export const FilterButton = styled(FaSearchLocation)`
   border: none;
   background: none;
   cursor: pointer;
-  padding-left: 10px;
+  padding: 0px 10px;
+  background-color: orange;
+  height: 100%;
+  border-radius: 0px 10px 10px 0px;
 `;
 
 export const InputErrorText = styled.p`

@@ -18,7 +18,7 @@ const Home = () => {
       <HomeLeftContainer>
         <HomeTitle>Find Your New Best Friend Today</HomeTitle>
         <Subheading>
-          Looking to for your new friend for life? Start your search today!
+          Looking for your new friend for life? Start your search today!
         </Subheading>
         <StyledLink to="filter" spy={true} smooth={true} duration={500}>
           <HomeButton>Start Search</HomeButton>

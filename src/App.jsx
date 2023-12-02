@@ -1,8 +1,8 @@
 import "./App.css";
 import Navbar from "./components/navbar/Navbar";
 import MobileNavBar from "./components/mobilenavbar/MobileNavBar";
-import Card from "./components/card/Card";
-import Home from "./components/home/Home";
+import Cards from "./components/card";
+import Home from "./components/home";
 import About from "./components/about/About";
 import Donate from "./components/donate/Donate";
 import Favorites from "./components/favorites/Favorites";
@@ -220,7 +220,7 @@ const App = () => {
                     <FadeLoader color="#ffbe0b" size={10} />
                   </div>
                 ) : (
-                  <Card
+                  <Cards
                     currentCats={currentCats}
                     handleFavorites={handleFavorites}
                     handleRemoveFavorites={handleRemoveFavorites}
