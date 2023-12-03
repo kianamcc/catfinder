@@ -1,14 +1,12 @@
 import React from "react";
 import "./Footer.css";
 import { BsFacebook, BsInstagram } from "react-icons/bs";
-import footerLogo from "../../assets/nav-logo.png";
 
 const Footer = () => {
   return (
     <section className="footer">
       <footer>
         <div className="footer-container">
-          <img src={footerLogo} alt="footer-logo" className="footer-logo" />
           <div className="footer-columns">
             <div className="footer-column">
               <h3>Resources</h3>

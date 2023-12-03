@@ -32,11 +32,13 @@
   text-decoration: none;
   color: #432818;
   font-size: 1.3rem;
+  transition: all 100ms ease-out;
 }
 
 .nav-link:hover {
   color: orange;
   border-bottom: 2px orange solid;
+  transition: all 100ms ease-in;
 }
 
 .favorites-link {

@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import "./About.css";
+import React, { useState } from "react";
 import catWhoImg from "../../assets/cat-about-1.jpg";
 import catMissionImg from "../../assets/cat-about-0.jpg";
 
@@ -9,6 +8,12 @@ import {
   AboutSectionTitle,
   AboutImage,
   AboutPlaceHolderImage,
+  AboutUsContainer,
+  AboutSectionContainer,
+  AboutMissionLeft,
+  AboutMissionRight,
+  AboutWhoLeft,
+  AboutWhoRight,
 } from "./styles";
 
 const About = () => {
@@ -16,19 +21,17 @@ const About = () => {
 
   return (
     <AboutContainer id="about">
-      <div className="about-us-container about-flex-item">
+      <AboutUsContainer>
         <AboutSectionTitle>About Us</AboutSectionTitle>
         <AboutText>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corrupti
-          animi amet soluta perspiciatis iusto earum laudantium doloribus
-          obcaecati laboriosam, porro facilis minima architecto accusamus
-          temporibus, tempore suscipit veritatis. Vel, et dolor vero pariatur
-          reprehenderit cum dolorem omnis voluptate qui enim suscipit temporibus
-          ex nesciunt repudiandae veniam dicta cumque ducimus totam?
+          Welcome to our cat adoption page! We are passionate about finding
+          loving homes for our furry friends. Our mission is to match every cat
+          with a caring family, providing a second chance for these wonderful
+          companions.
         </AboutText>
-      </div>
-      <div className="about-who-container about-flex-item">
-        <div className="about-who-left">
+      </AboutUsContainer>
+      <AboutSectionContainer>
+        <AboutWhoLeft>
           <AboutSectionTitle>Who we are</AboutSectionTitle>
           <AboutText>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate
@@ -38,8 +41,8 @@ const About = () => {
             blanditiis quibusdam laboriosam suscipit minus nemo soluta. Quod
             unde
           </AboutText>
-        </div>
-        <div className="about-who-right">
+        </AboutWhoLeft>
+        <AboutWhoRight>
           {imageLoading ? (
             <AboutPlaceHolderImage />
           ) : (
@@ -50,22 +53,18 @@ const About = () => {
               loading="lazy"
             />
           )}
-        </div>
-      </div>
-      <div className="about-mission-container about-flex-item">
-        <div className="about-mission-left">
-          {/* {imageLoading ? (
-            <AboutPlaceHolderImage />
-          ) : ( */}
+        </AboutWhoRight>
+      </AboutSectionContainer>
+      <AboutSectionContainer>
+        <AboutMissionLeft>
           <AboutImage
             src={catMissionImg}
             alt="about-cat-2"
             onLoad={() => setImageLoading(false)}
             loading="lazy"
           />
-          {/* )} */}
-        </div>
-        <div className="about-mission-right">
+        </AboutMissionLeft>
+        <AboutMissionRight>
           <AboutSectionTitle>Our Mission</AboutSectionTitle>
           <AboutText>
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quos
@@ -73,8 +72,8 @@ const About = () => {
             facilis facere rerum dicta recusandae voluptatum ad. Eius, assumenda
             minima? Atque esse expedita odio porro placeat error, iusto hic quod
           </AboutText>
-        </div>
-      </div>
+        </AboutMissionRight>
+      </AboutSectionContainer>
     </AboutContainer>
   );
 };

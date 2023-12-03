@@ -72,6 +72,19 @@ export const HomeButton = styled.button`
 export const StyledImg = styled.img`
   width: 100%;
   border-radius: 50%;
+  position: relative;
+  transform: translateX(100%);
+  animation: slideIn 250ms forwards;
+
+  @keyframes slideIn {
+    from {
+      transform: translateX(100%);
+    }
+
+    to {
+      transform: translateX(0%);
+    }
+  }
 `;
 
 export const HomeRightContainer = styled.div`
