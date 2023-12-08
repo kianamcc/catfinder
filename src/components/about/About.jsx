@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import catWhoImg from "../../assets/cat-about-1.jpg";
 import catMissionImg from "../../assets/cat-about-0.jpg";
 
@@ -14,6 +15,7 @@ import {
   AboutMissionRight,
   AboutWhoLeft,
   AboutWhoRight,
+  BackgroundImageContainer,
 } from "./styles";
 
 const About = () => {
@@ -21,25 +23,25 @@ const About = () => {
 
   return (
     <AboutContainer id="about">
-      <AboutUsContainer>
-        <AboutSectionTitle>About Us</AboutSectionTitle>
-        <AboutText>
-          Welcome to our cat adoption page! We are passionate about finding
-          loving homes for our furry friends. Our mission is to match every cat
-          with a caring family, providing a second chance for these wonderful
-          companions.
-        </AboutText>
-      </AboutUsContainer>
+      <BackgroundImageContainer>
+        <AboutUsContainer>
+          <AboutSectionTitle>About Us</AboutSectionTitle>
+          <AboutText $aboutUs={true}>
+            Welcome to our cat adoption page! We are passionate about finding
+            loving homes for our furry feline friends.
+          </AboutText>
+        </AboutUsContainer>
+      </BackgroundImageContainer>
+
       <AboutSectionContainer>
         <AboutWhoLeft>
           <AboutSectionTitle>Who we are</AboutSectionTitle>
           <AboutText>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate
-            cum obcaecati perferendis aliquid deleniti, soluta rerum facere,
-            voluptate magnam, ea aperiam! Sapiente facilis a autem, libero
-            quidem laborum similique. Tenetur eveniet ducimus aliquid,
-            blanditiis quibusdam laboriosam suscipit minus nemo soluta. Quod
-            unde
+            At Catfinder, we're a dedicated team passionate about connecting
+            cats in need with loving homes. Our mission is to rescue, care for,
+            and facilitate adoptions, ensuring each cat finds a family where
+            they'll thrive. Join us in our commitment to making a difference in
+            the lives of these incredible felines.
           </AboutText>
         </AboutWhoLeft>
         <AboutWhoRight>
@@ -55,6 +57,7 @@ const About = () => {
           )}
         </AboutWhoRight>
       </AboutSectionContainer>
+
       <AboutSectionContainer>
         <AboutMissionLeft>
           <AboutImage
@@ -67,10 +70,11 @@ const About = () => {
         <AboutMissionRight>
           <AboutSectionTitle>Our Mission</AboutSectionTitle>
           <AboutText>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quos
-            voluptatem dolor est nulla magni quibusdam quis, minima eveniet
-            facilis facere rerum dicta recusandae voluptatum ad. Eius, assumenda
-            minima? Atque esse expedita odio porro placeat error, iusto hic quod
+            Our mission is to provide a second chance to cats from all walks of
+            life - whether they're strays, rescues, or in foster care. Through
+            our efforts, we strive to be a beacon of hope and support for cats
+            regardless of their origin, promoting the value of adoption and
+            responsible pet guardianship within our community.
           </AboutText>
         </AboutMissionRight>
       </AboutSectionContainer>

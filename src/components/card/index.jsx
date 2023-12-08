@@ -1,24 +1,34 @@
 import React from "react";
-import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import { AiOutlineHeart } from "react-icons/ai";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { MdEmail, MdLocationOn } from "react-icons/md";
-import { FaInfoCircle } from "react-icons/fa";
-import "./Card.css";
-import { CardContainer, CardTopSection, CardsContainer } from "./styles";
+
+import {
+  CardContainer,
+  CardTopSection,
+  CardsContainer,
+  CardImageContainer,
+  CardImage,
+  CardBottomSectionContainer,
+  CardInfoContainer,
+  CardEmailLink,
+  CardHashtags,
+  CardDescription,
+  StyledAiFillHeart,
+} from "./styles";
 
 const Cards = (props) => {
   return (
-    <section className="card-container">
+    <section id="card-container">
       <CardsContainer>
         {props.currentCats.map((cat) => {
           return (
             <CardContainer key={cat.id}>
               <CardTopSection>
                 <h3>{cat.name}</h3>
-                <div className="heart-icon-container">
+                <div style={{ cursor: "pointer" }}>
                   {cat.isFavorite ? (
-                    <AiFillHeart
-                      className="heart-fill-icon"
+                    <StyledAiFillHeart
                       size={30}
                       onClick={(e) => {
                         props.handleRemoveFavorites(cat);
@@ -34,9 +44,8 @@ const Cards = (props) => {
                   )}
                 </div>
               </CardTopSection>
-              <div className="card-img-container">
-                <img
-                  className="card-img"
+              <CardImageContainer>
+                <CardImage
                   src={
                     cat && cat.primary_photo_cropped
                       ? cat.primary_photo_cropped["small"]
@@ -44,24 +53,36 @@ const Cards = (props) => {
                   }
                   alt="Cat"
                 />
-              </div>
-              <div className="card-bottom">
-                {/* <div className="card-description">{cat.description}</div> */}
-                <div className="card-location">
+              </CardImageContainer>
+              <CardBottomSectionContainer>
+                <CardDescription>{cat.description}</CardDescription>
+                <div>
                   {cat.distance ? (
                     <>
-                      <MdLocationOn className="icons" />
+                      <MdLocationOn
+                        styles={{
+                          height: "20px;",
+                          width: "20px;",
+                          paddingRight: "5px;",
+                        }}
+                      />
                       <span>{cat.distance} miles away in </span>
                       {cat.contact.address.city && (
                         <span>{cat.contact.address.city},</span>
-                      )}{" "}
+                      )}
                       {cat.contact.address.state && (
                         <span>{cat.contact.address.state}</span>
                       )}
                     </>
                   ) : (
                     <>
-                      <MdLocationOn className="icons" />
+                      <MdLocationOn
+                        styles={{
+                          height: "20px;",
+                          width: "20px;",
+                          paddingRight: "5px;",
+                        }}
+                      />
                       {cat.contact.address.city && (
                         <span>{cat.contact.address.city},</span>
                       )}{" "}
@@ -72,48 +93,42 @@ const Cards = (props) => {
                   )}
                 </div>
 
-                <div className="card-phone">
+                <CardInfoContainer>
                   {cat.contact.phone && (
                     <>
-                      <BsFillTelephoneFill className="icons" />{" "}
+                      <BsFillTelephoneFill
+                        styles={{
+                          height: "20px;",
+                          width: "20px;",
+                          paddingRight: "5px;",
+                        }}
+                      />
                       {cat.contact.phone}
                     </>
                   )}
-                </div>
-                <div className="card-email">
+                </CardInfoContainer>
+                <CardInfoContainer>
                   {cat.contact.email && (
                     <>
-                      <MdEmail className="icons" />
-                      <a
-                        href={`mailto:${cat.contact.email}`}
-                        className="card-email-link"
-                      >
+                      <MdEmail
+                        styles={{
+                          height: "20px;",
+                          width: "20px;",
+                          paddingRight: "5px;",
+                        }}
+                      />
+                      <CardEmailLink href={`mailto:${cat.contact.email}`}>
                         {cat.contact.email}
-                      </a>
+                      </CardEmailLink>
                     </>
                   )}
-                </div>
-                {/* <div className="card-email">
-                    {cat.url && (
-                      <>
-                        <FaInfoCircle className="icons" />{" "}
-                        <a
-                          href={cat.url}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="card-email-link"
-                        >
-                          Learn more
-                        </a>
-                      </>
-                    )}
-                  </div> */}
-                <div className="card-hashtags">
+                </CardInfoContainer>
+                <CardHashtags>
                   {cat.tags.slice(0, 3).map((tag, index) => {
                     return <span key={`${cat.id}-${index}`}>#{tag}</span>;
                   })}
-                </div>
-              </div>
+                </CardHashtags>
+              </CardBottomSectionContainer>
             </CardContainer>
           );
         })}

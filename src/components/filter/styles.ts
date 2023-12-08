@@ -17,7 +17,7 @@ export const InputBoxContainer = styled.div`
   box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   height: 50px;
-  width: 50%;
+  width: 70%;
   display: flex;
   align-items: center;
 

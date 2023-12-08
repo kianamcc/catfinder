@@ -21,6 +21,7 @@ const App = () => {
   const [error, setError] = useState(false);
   const [catData, setCatData] = useState([]);
   const [currentCats, setCurrentCats] = useState([]);
+  const [favoriteCurrentCats, setFavoriteCurrentCats] = useState([]);
   const [isFilterLoading, setIsFilterLoading] = useState(false);
   const [catDataLoading, setCatDataLoading] = useState(false);
   const [location, setLocation] = useState(false);
@@ -28,7 +29,7 @@ const App = () => {
   const [clicked, setClicked] = useState(false);
   /* Hooks for Pagination */
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageNumberLimit, setPageNumberLimit] = useState(3);
+  const [pageNumberLimit, setPageNumberLimit] = useState(4);
   const [minPageNumber, setMinPageNumber] = useState(1);
   const [maxPageNumber, setMaxPageNumber] = useState(3);
   const [catsPerPage] = useState(25);
@@ -61,7 +62,7 @@ const App = () => {
 
         let url = "";
 
-        for (let page = 1; page <= 3; page++) {
+        for (let page = 1; page <= 8; page++) {
           if (input) {
             url = `https://api.petfinder.com/v2/animals?type=cat&limit=100&location=${input}`;
           } else {
@@ -101,6 +102,7 @@ const App = () => {
 
   useEffect(() => {
     setCurrentCats(catData.slice(indexOfFirstPost, indexOfLastPost));
+    setFavoriteCurrentCats(cats.slice(indexOfFirstPost, indexOfLastPost));
   }, [catData, currentPage]);
 
   /* STORAGE HANDLING */
@@ -197,6 +199,9 @@ const App = () => {
     }
   };
 
+  const getFavoriteCats = localStorage.getItem("catfinder-favorites");
+  const cats = JSON.parse(getFavoriteCats) || [];
+
   return (
     <div className="App">
       <Router>
@@ -208,24 +213,27 @@ const App = () => {
             element={
               <Fragment>
                 <Home />
+
                 <Filter
                   locationHandler={locationHandler}
                   error={error}
                   isFilterLoading={isFilterLoading}
                 />
-
                 {catDataLoading ? (
                   <div className="data-loading-container">
                     <h2 className="data-loading">Loading cats...</h2>
                     <FadeLoader color="#ffbe0b" size={10} />
                   </div>
                 ) : (
-                  <Cards
-                    currentCats={currentCats}
-                    handleFavorites={handleFavorites}
-                    handleRemoveFavorites={handleRemoveFavorites}
-                  />
+                  <>
+                    <Cards
+                      currentCats={currentCats}
+                      handleFavorites={handleFavorites}
+                      handleRemoveFavorites={handleRemoveFavorites}
+                    />
+                  </>
                 )}
+
                 <Pagination
                   totalCats={catData.length}
                   catsPerPage={catsPerPage}
@@ -246,11 +254,13 @@ const App = () => {
           <Route
             path="/favorites"
             element={
-              <Favorites
-                handleFavorites={handleFavorites}
-                handleRemoveFavorites={handleRemoveFavorites}
-                favoriteCats={favoriteCats}
-              />
+              <>
+                <Favorites
+                  handleFavorites={handleFavorites}
+                  handleRemoveFavorites={handleRemoveFavorites}
+                  favoriteCats={favoriteCats}
+                />
+              </>
             }
           />
         </Routes>

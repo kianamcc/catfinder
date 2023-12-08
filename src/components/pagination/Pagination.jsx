@@ -11,6 +11,7 @@ const Pagination = (props) => {
   const totalPages = Math.ceil(props.totalCats / props.catsPerPage);
 
   const pageNumbers = [];
+
   for (let i = props.minPageNumber; i <= props.maxPageNumber; i++) {
     if (i <= totalPages) {
       pageNumbers.push(i);

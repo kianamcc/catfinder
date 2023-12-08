@@ -1,17 +1,12 @@
 import styled from "styled-components";
 
+import blackCat from "../../assets/blackCat.jpg";
+
 export const AboutContainer = styled.section`
   margin-bottom: 0px;
-  padding: 100px 50px;
-  background-color: #fff3b0;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  gap: 100px;
-
-  @media ${({ theme }) => theme.desktop} {
-    padding: 150px 100px;
-  }
 `;
 
 export const AboutSectionContainer = styled.div`
@@ -20,7 +15,13 @@ export const AboutSectionContainer = styled.div`
   align-items: center;
   justify-content: center;
   gap: 50px;
-  /* padding: 20px; */
+  padding: 50px 42px;
+  text-align: center;
+
+  @media ${({ theme }) => theme.tablet} {
+    text-align: left;
+    padding: 100px;
+  }
 
   @media ${({ theme }) => theme.desktop} {
     flex-direction: row;
@@ -36,18 +37,50 @@ export const AboutSectionContainer = styled.div`
   }
 `;
 
+export const BackgroundImageContainer = styled.div`
+  height: 100vh;
+  background-image: url(${blackCat});
+  background-size: 0 0;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-shadow: inset 0 0 0 50vw rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+`;
+
 export const AboutUsContainer = styled.div`
+  color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
+  padding: 50px;
+  margin: 25px;
+  width: 400px;
+  border: rgba(255, 255, 255, 0.4) 2px solid;
+
+  @media ${({ theme }) => theme.tablet} {
+    position: absolute;
+    width: 500px;
+    right: 250px;
+    left: 50px;
+  }
+
+  @media ${({ theme }) => theme.desktop} {
+    position: absolute;
+    width: 500px;
+    right: 250px;
+    left: 50px;
+  }
 `;
 
-export const AboutText = styled.p`
-  font-size: 0.8;
-  line-height: 3rem;
+export const AboutText = styled.p<{ $aboutUs?: boolean }>`
+  font-size: 0.8rem;
+  line-height: 2.5rem;
   overflow: hidden;
-  color: ${({ theme }) => theme.lightGrey};
+  color: ${({ $aboutUs, theme }) =>
+    $aboutUs ? "white" : `${theme.lightGrey}`};
   animation: textAppear 500ms;
 
   @keyframes textAppear {
@@ -64,16 +97,22 @@ export const AboutText = styled.p`
 
   @media ${({ theme }) => theme.tablet} {
     font-size: 1.3rem;
+    line-height: 3rem;
   }
 `;
 
 export const AboutSectionTitle = styled.h2`
   font-size: 2rem;
+  color: ${({ theme }) => theme.subHeadingOrange};
 `;
 
 export const AboutImage = styled.img`
   width: 250px;
   border-radius: 10px;
+
+  @media ${({ theme }) => theme.tablet} {
+    width: 350px;
+  }
 `;
 
 export const AboutPlaceHolderImage = styled.div`
