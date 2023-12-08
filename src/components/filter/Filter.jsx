@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./Filter.css";
 import { PulseLoader } from "react-spinners";
 
 import {
