@@ -1,64 +1,84 @@
-import React from "react";
-import "./About.css";
+import React, { useState } from "react";
+
 import catWhoImg from "../../assets/cat-about-1.jpg";
 import catMissionImg from "../../assets/cat-about-0.jpg";
-import { Fade } from "react-awesome-reveal";
+
+import {
+  AboutContainer,
+  AboutText,
+  AboutSectionTitle,
+  AboutImage,
+  AboutPlaceHolderImage,
+  AboutUsContainer,
+  AboutSectionContainer,
+  AboutMissionLeft,
+  AboutMissionRight,
+  AboutWhoLeft,
+  AboutWhoRight,
+  BackgroundImageContainer,
+} from "./styles";
 
 const About = () => {
+  const [imageLoading, setImageLoading] = useState(true);
+
   return (
-    <section className="about">
-      <div className="about-container">
-        <Fade duration={1500}>
-          <div className="about-us-container about-flex-item">
-            <h2 className="about-title">About Us</h2>
-            <p className="about-text">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corrupti
-              animi amet soluta perspiciatis iusto earum laudantium doloribus
-              obcaecati laboriosam, porro facilis minima architecto accusamus
-              temporibus, tempore suscipit veritatis. Vel, et dolor vero
-              pariatur reprehenderit cum dolorem omnis voluptate qui enim
-              suscipit temporibus ex nesciunt repudiandae veniam dicta cumque
-              ducimus totam?
-            </p>
-          </div>
-        </Fade>
-        <Fade duration={1500}>
-          <div className="about-who-container about-flex-item">
-            <div className="about-who-left">
-              <h2 className="about-title">Who we are</h2>
-              <p className="about-text">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Cupiditate cum obcaecati perferendis aliquid deleniti, soluta
-                rerum facere, voluptate magnam, ea aperiam! Sapiente facilis a
-                autem, libero quidem laborum similique. Tenetur eveniet ducimus
-                aliquid, blanditiis quibusdam laboriosam suscipit minus nemo
-                soluta. Quod unde
-              </p>
-            </div>
-            <div className="about-who-right">
-              <img src={catWhoImg} alt="about-cat" className="about-img" />
-            </div>
-          </div>
-        </Fade>
-        <Fade duration={1500}>
-          <div className="about-mission-container about-flex-item">
-            <div className="about-mission-left">
-              <img src={catMissionImg} alt="about-cat" className="about-img" />
-            </div>
-            <div className="about-mission-right">
-              <h2 className="about-title">Our Mission</h2>
-              <p className="about-text">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quos
-                voluptatem dolor est nulla magni quibusdam quis, minima eveniet
-                facilis facere rerum dicta recusandae voluptatum ad. Eius,
-                assumenda minima? Atque esse expedita odio porro placeat error,
-                iusto hic quod
-              </p>
-            </div>
-          </div>
-        </Fade>
-      </div>
-    </section>
+    <AboutContainer id="about">
+      <BackgroundImageContainer>
+        <AboutUsContainer>
+          <AboutSectionTitle>About Us</AboutSectionTitle>
+          <AboutText $aboutUs={true}>
+            Welcome to our cat adoption page! We are passionate about finding
+            loving homes for our furry feline friends.
+          </AboutText>
+        </AboutUsContainer>
+      </BackgroundImageContainer>
+
+      <AboutSectionContainer>
+        <AboutWhoLeft>
+          <AboutSectionTitle>Who we are</AboutSectionTitle>
+          <AboutText>
+            At Catfinder, we're a dedicated team passionate about connecting
+            cats in need with loving homes. Our mission is to rescue, care for,
+            and facilitate adoptions, ensuring each cat finds a family where
+            they'll thrive. Join us in our commitment to making a difference in
+            the lives of these incredible felines.
+          </AboutText>
+        </AboutWhoLeft>
+        <AboutWhoRight>
+          {imageLoading ? (
+            <AboutPlaceHolderImage />
+          ) : (
+            <AboutImage
+              src={catWhoImg}
+              alt="about-cat-1"
+              onLoad={() => setImageLoading(false)}
+              loading="lazy"
+            />
+          )}
+        </AboutWhoRight>
+      </AboutSectionContainer>
+
+      <AboutSectionContainer>
+        <AboutMissionLeft>
+          <AboutImage
+            src={catMissionImg}
+            alt="about-cat-2"
+            onLoad={() => setImageLoading(false)}
+            loading="lazy"
+          />
+        </AboutMissionLeft>
+        <AboutMissionRight>
+          <AboutSectionTitle>Our Mission</AboutSectionTitle>
+          <AboutText>
+            Our mission is to provide a second chance to cats from all walks of
+            life - whether they're strays, rescues, or in foster care. Through
+            our efforts, we strive to be a beacon of hope and support for cats
+            regardless of their origin, promoting the value of adoption and
+            responsible pet guardianship within our community.
+          </AboutText>
+        </AboutMissionRight>
+      </AboutSectionContainer>
+    </AboutContainer>
   );
 };
 

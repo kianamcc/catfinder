@@ -1,45 +1,45 @@
 import React, { useState } from "react";
-import "./Filter.css";
-import { FaSearchLocation } from "react-icons/fa";
 import { PulseLoader } from "react-spinners";
+
+import {
+  FilterInputBox,
+  FilterButton,
+  FilterContainer,
+  InputBoxContainer,
+  InputErrorText,
+} from "./styles";
 
 const Filter = (props) => {
   const [userInput, setUserInput] = useState("");
-  // let input = document.getElementsByClassName("filter-input-box");
-  // input.setAttribute("size", input.getAttribute("placeholder").length);
+
   return (
-    <section className="filter" id="filter">
-      <div className="filter-container">
-        <div className="filter-inner-container">
-          <input
-            placeholder="Enter your zipcode, state, or city"
-            type="text"
-            className="filter-input-box"
-            onChange={(e) => {
-              setUserInput(e.target.value);
+    <FilterContainer id="filter">
+      <InputBoxContainer>
+        <FilterInputBox
+          props={props}
+          placeholder="Enter your zipcode, state, or city"
+          type="text"
+          onChange={(e) => {
+            setUserInput(e.target.value);
+          }}
+        />
+        {props.isFilterLoading ? (
+          <PulseLoader color="#ffbe0b" size={10} />
+        ) : (
+          <FilterButton
+            size={30}
+            onClick={() => {
+              props.locationHandler(userInput);
             }}
           />
-          {props.isFilterLoading ? (
-            <PulseLoader color="#ffbe0b" size={10} />
-          ) : (
-            <FaSearchLocation
-              size={30}
-              className="filter-btn"
-              onClick={() => {
-                props.locationHandler(userInput);
-              }}
-            />
-          )}
-        </div>
-        <div className="input-error-container">
-          {props.error && (
-            <p className="input-error">
-              We could not find any cats with the given input...
-            </p>
-          )}
-        </div>
-      </div>
-    </section>
+        )}
+      </InputBoxContainer>
+      {props.error && (
+        <InputErrorText>
+          We could not find any cats with the given input...
+        </InputErrorText>
+      )}
+    </FilterContainer>
   );
 };
 

@@ -1,13 +1,19 @@
 import React from "react";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
-import navLogo from "../../assets/nav-logo.png";
+import navLogo from "../../assets/nav-logo.svg";
+
+import { StyledNavLogo } from "./styles";
 
 const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="nav-container">
-        <img src={navLogo} alt="navbar-logo" className="navbar-logo" />
+        <StyledNavLogo
+          src={navLogo}
+          alt="navbar-logo"
+          className="navbar-logo"
+        />
         <ul className="nav-links-container">
           <li className="nav-link-item-container">
             <Link to="/" className="nav-link">
