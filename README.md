@@ -2,7 +2,7 @@
 
 ## Screenshots
 
-<img width="1397" alt="Screen Shot 2023-04-11 at 3 12 31 PM" src="https://user-images.githubusercontent.com/42532725/231300562-bea5f1f4-8cca-4dd5-b699-cad1edc939e9.png">
+<img width="1424" alt="Screenshot 2023-12-11 at 11 35 48 AM" src="https://github.com/kianamcc/catfinder/assets/42532725/003493c0-049f-4bd2-bb4e-51c1169ca360">
 
 ## Description
 
