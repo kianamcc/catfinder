@@ -1,3 +1,8 @@
+import axios from "axios";
+import { Fragment, useEffect, useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { FadeLoader } from "react-spinners";
+
 import "./App.css";
 import Navbar from "./components/navbar/Navbar";
 import MobileNavBar from "./components/mobilenavbar/MobileNavBar";
@@ -5,20 +10,16 @@ import Cards from "./components/card";
 import Home from "./components/home";
 import About from "./components/about/About";
 import Donate from "./components/donate/Donate";
-import Favorites from "./components/favorites/Favorites";
 import Filter from "./components/filter/Filter";
 import Footer from "./components/footer/Footer";
-import axios from "axios";
-import { Fragment, useEffect, useState } from "react";
-import Pagination from "./components/pagination/Pagination";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { FadeLoader } from "react-spinners";
+import catDataTest from "./data";
+import catDataFavoritesTest from "./favoriteData";
 
 const { VITE_APP_API_KEY, VITE_APP_SECRET_KEY } = import.meta.env;
 
 const App = () => {
-  const [favoriteCats, setFavoriteCats] = useState([]);
   const [error, setError] = useState(false);
+  const [favoriteCats, setFavoriteCats] = useState([]);
   const [catData, setCatData] = useState([]);
   const [currentCats, setCurrentCats] = useState([]);
   const [favoriteCurrentCats, setFavoriteCurrentCats] = useState([]);
@@ -27,9 +28,9 @@ const App = () => {
   const [location, setLocation] = useState(false);
   const [input, setInput] = useState("");
   const [clicked, setClicked] = useState(false);
-  /* Hooks for Pagination */
+  /* Pagination */
+  const rowPageNumberLimit = 3;
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageNumberLimit, setPageNumberLimit] = useState(4);
   const [minPageNumber, setMinPageNumber] = useState(1);
   const [maxPageNumber, setMaxPageNumber] = useState(3);
   const [catsPerPage] = useState(25);
@@ -38,9 +39,10 @@ const App = () => {
   let indexOfFirstPost = indexOfLastPost - catsPerPage;
 
   useEffect(() => {
-    const catFavorites = localStorage.getItem("catfinder-favorites");
-    const output = JSON.parse(catFavorites) || [];
-    setFavoriteCats(output);
+    const getCatFavorites = localStorage.getItem("catfinder-favorites");
+    const catFavoritesData = JSON.parse(getCatFavorites) || [];
+
+    setFavoriteCats(catFavoritesData);
     setCatDataLoading(true);
 
     if (clicked) {
@@ -54,7 +56,6 @@ const App = () => {
         "https://api.petfinder.com/v2/oauth2/token",
         `grant_type=client_credentials&client_id=${VITE_APP_API_KEY}&client_secret=${VITE_APP_SECRET_KEY}`
       )
-
       .then((response) => {
         let accessT = response.data.access_token;
         setCatDataLoading(false);
@@ -102,7 +103,9 @@ const App = () => {
 
   useEffect(() => {
     setCurrentCats(catData.slice(indexOfFirstPost, indexOfLastPost));
-    setFavoriteCurrentCats(cats.slice(indexOfFirstPost, indexOfLastPost));
+    setFavoriteCurrentCats(
+      favoriteCats.slice(indexOfFirstPost, indexOfLastPost)
+    );
   }, [catData, currentPage]);
 
   /* STORAGE HANDLING */
@@ -155,6 +158,10 @@ const App = () => {
       })
     );
 
+    if (favoriteCurrentCats.length === 1) {
+      setCurrentPage((prev) => prev - 1);
+    }
+
     setFavoriteCats(filterUnfavorite);
     saveToLocalStorage(filterUnfavorite);
   };
@@ -184,8 +191,8 @@ const App = () => {
       currentPage + 1 > maxPageNumber &&
       currentPage + 1 < Math.ceil(catData.length / catsPerPage)
     ) {
-      setMaxPageNumber(maxPageNumber + pageNumberLimit);
-      setMinPageNumber(minPageNumber + pageNumberLimit);
+      setMaxPageNumber(maxPageNumber + rowPageNumberLimit);
+      setMinPageNumber(minPageNumber + rowPageNumberLimit);
     }
   };
 
@@ -194,13 +201,10 @@ const App = () => {
       setCurrentPage((prev) => prev - 1);
     }
     if (currentPage - 1 < minPageNumber && currentPage > 3) {
-      setMaxPageNumber(maxPageNumber - pageNumberLimit);
-      setMinPageNumber(minPageNumber - pageNumberLimit);
+      setMaxPageNumber(maxPageNumber - rowPageNumberLimit);
+      setMinPageNumber(minPageNumber - rowPageNumberLimit);
     }
   };
-
-  const getFavoriteCats = localStorage.getItem("catfinder-favorites");
-  const cats = JSON.parse(getFavoriteCats) || [];
 
   return (
     <div className="App">
@@ -230,22 +234,19 @@ const App = () => {
                       currentCats={currentCats}
                       handleFavorites={handleFavorites}
                       handleRemoveFavorites={handleRemoveFavorites}
+                      totalCats={catData.length}
+                      catsPerPage={catsPerPage}
+                      handlePageClick={handlePageClick}
+                      numberOfPages={5}
+                      currentPage={currentPage}
+                      handleNextPage={handleNextPage}
+                      handlePreviousPage={handlePreviousPage}
+                      rowPageNumberLimit={rowPageNumberLimit}
+                      minPageNumber={minPageNumber}
+                      maxPageNumber={maxPageNumber}
                     />
                   </>
                 )}
-
-                <Pagination
-                  totalCats={catData.length}
-                  catsPerPage={catsPerPage}
-                  handlePageClick={handlePageClick}
-                  numberOfPages={5}
-                  currentPage={currentPage}
-                  handleNextPage={handleNextPage}
-                  handlePreviousPage={handlePreviousPage}
-                  pageNumberLimit={pageNumberLimit}
-                  minPageNumber={minPageNumber}
-                  maxPageNumber={maxPageNumber}
-                />
               </Fragment>
             }
           />
@@ -255,10 +256,20 @@ const App = () => {
             path="/favorites"
             element={
               <>
-                <Favorites
+                <Cards
+                  currentCats={favoriteCurrentCats}
                   handleFavorites={handleFavorites}
                   handleRemoveFavorites={handleRemoveFavorites}
-                  favoriteCats={favoriteCats}
+                  totalCats={favoriteCats.length}
+                  catsPerPage={catsPerPage}
+                  handlePageClick={handlePageClick}
+                  numberOfPages={5}
+                  currentPage={currentPage}
+                  handleNextPage={handleNextPage}
+                  handlePreviousPage={handlePreviousPage}
+                  rowPageNumberLimit={rowPageNumberLimit}
+                  minPageNumber={minPageNumber}
+                  maxPageNumber={maxPageNumber}
                 />
               </>
             }
