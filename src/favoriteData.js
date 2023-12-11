@@ -1,20 +1,20 @@
 import cat from "./assets/cat-about-0.jpg";
 
-const catDataTest = [
+const catDataFavoritesTest = [
   {
     id: 1,
-    name: "Coke",
+    name: "Fav 1",
     src: cat,
-    description: "Sweet coke",
+    description: "I am Fav 1",
     phone: "890-193-2932",
     email: "adoptcoke@gmail.com",
     tags: ["Affectionate", "Playful", "Chubby"],
   },
   {
     id: 2,
-    name: "Sunni",
+    name: "Fav 2",
     src: cat,
-    description: "Sunni is very sunny",
+    description: "I am Fav 2",
     phone: "890-343-4523",
     email: "sscandy@yahoo.com",
     tags: ["Moody", "Stubborn"],
@@ -129,22 +129,13 @@ const catDataTest = [
   },
   {
     id: 15,
-    name: "SunniAgain",
+    name: "Last Fav #15",
     src: cat,
-    description: "Sunni is very sunny",
-    phone: "890-343-4523",
-    email: "sscandy@yahoo.com",
-    tags: ["Moody", "Stubborn"],
-  },
-  {
-    id: 16,
-    name: "Eren",
-    src: cat,
-    description: "Eren is very sunny",
+    description: "I last Fav",
     phone: "890-343-4523",
     email: "sscandy@yahoo.com",
     tags: ["Moody", "Stubborn"],
   },
 ];
 
-export default catDataTest;
+export default catDataFavoritesTest;

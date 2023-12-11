@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { MdEmail, MdLocationOn } from "react-icons/md";
+
+import Pagination from "../pagination/Pagination";
 
 import {
   CardContainer,
@@ -15,6 +17,8 @@ import {
   CardHashtags,
   CardDescription,
   StyledAiFillHeart,
+  NoFavoritesContainer,
+  NoFavoritesText,
 } from "./styles";
 
 const Cards = (props) => {
@@ -47,6 +51,7 @@ const Cards = (props) => {
               <CardImageContainer>
                 <CardImage
                   src={
+                    // cat.src // test, uncomment below when done
                     cat && cat.primary_photo_cropped
                       ? cat.primary_photo_cropped["small"]
                       : null
@@ -83,10 +88,10 @@ const Cards = (props) => {
                           paddingRight: "5px;",
                         }}
                       />
-                      {cat.contact.address.city && (
+                      {cat.contact?.address?.city && (
                         <span>{cat.contact.address.city},</span>
                       )}{" "}
-                      {cat.contact.address.state && (
+                      {cat.contact?.address?.state && (
                         <span>{cat.contact.address.state}</span>
                       )}
                     </>
@@ -94,7 +99,7 @@ const Cards = (props) => {
                 </div>
 
                 <CardInfoContainer>
-                  {cat.contact.phone && (
+                  {cat.contact?.phone && (
                     <>
                       <BsFillTelephoneFill
                         styles={{
@@ -108,7 +113,7 @@ const Cards = (props) => {
                   )}
                 </CardInfoContainer>
                 <CardInfoContainer>
-                  {cat.contact.email && (
+                  {cat.contact?.email && (
                     <>
                       <MdEmail
                         styles={{
@@ -133,6 +138,27 @@ const Cards = (props) => {
           );
         })}
       </CardsContainer>
+      {/* {!props.currentCats.length && <h2>no cats</h2>} */}
+
+      {props.totalCats ? (
+        <Pagination
+          currentCats={props.currentCats}
+          totalCats={props.totalCats}
+          catsPerPage={props.catsPerPage}
+          handlePageClick={props.handlePageClick}
+          numberOfPages={5}
+          currentPage={props.currentPage}
+          handleNextPage={props.handleNextPage}
+          handlePreviousPage={props.handlePreviousPage}
+          rowPageNumberLimit={props.rowPageNumberLimit}
+          minPageNumber={props.minPageNumber}
+          maxPageNumber={props.maxPageNumber}
+        />
+      ) : (
+        <NoFavoritesContainer>
+          <NoFavoritesText>No cats found...</NoFavoritesText>
+        </NoFavoritesContainer>
+      )}
     </section>
   );
 };
