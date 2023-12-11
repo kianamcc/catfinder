@@ -9,7 +9,6 @@ export const HomeContainer = styled.section`
   padding-bottom: 100px;
   display: flex;
   flex-direction: column;
-  height: 100%;
   padding: 50px;
   gap: 50px;
   background-color: #fefae0;
