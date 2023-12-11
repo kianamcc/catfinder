@@ -14,6 +14,7 @@
 
 - React
 - JavaScript
+- TypeScript
 - HTML
 - CSS
 - Styled Components
