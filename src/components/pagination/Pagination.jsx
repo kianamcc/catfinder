@@ -1,5 +1,4 @@
-import React from "react";
-import "./Pagination.css";
+import React, { useEffect, useState } from "react";
 import { IoPawSharp } from "react-icons/io5";
 import { Link } from "react-scroll";
 import {
@@ -7,9 +6,10 @@ import {
   BsFillArrowLeftCircleFill,
 } from "react-icons/bs";
 
+import "./Pagination.css";
+
 const Pagination = (props) => {
   const totalPages = Math.ceil(props.totalCats / props.catsPerPage);
-
   const pageNumbers = [];
 
   for (let i = props.minPageNumber; i <= props.maxPageNumber; i++) {

@@ -14,6 +14,7 @@ export const CardContainer = styled.div`
   padding: 1.5em;
   background-color: white;
   transition: all 250ms ease-in-out;
+  margin: 25px 0px;
 
   &:hover {
     transition: all 250ms ease-in-out;
@@ -93,4 +94,15 @@ export const CardDescription = styled.div`
   text-overflow: ellipsis;
   overflow-y: scroll;
   line-height: 1.5em;
+`;
+
+export const NoFavoritesContainer = styled.div`
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+`;
+
+export const NoFavoritesText = styled.h2`
+  font-size: 1.5rem;
+  padding-top: 50px;
 `;
