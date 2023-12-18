@@ -138,7 +138,6 @@ const Cards = (props) => {
           );
         })}
       </CardsContainer>
-      {/* {!props.currentCats.length && <h2>no cats</h2>} */}
 
       {props.totalCats ? (
         <Pagination

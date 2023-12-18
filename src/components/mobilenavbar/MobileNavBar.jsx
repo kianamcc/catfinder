@@ -44,26 +44,24 @@ const MobileNavBar = () => {
   );
   return (
     <nav className="mobile-navbar">
-      <div className="mobile-nav-container">
-        {open ? (
-          <div className="menu-container">
-            {navLinks}
-            <GrClose
-              className="menu-icon"
-              size={30}
-              onClick={() => setOpen((prev) => !prev)}
-            />
-          </div>
-        ) : (
-          <div className="menu-container">
-            <SlMenu
-              className="menu-icon"
-              size={30}
-              onClick={() => setOpen((prev) => !prev)}
-            />
-          </div>
-        )}
-      </div>
+      {open ? (
+        <div className="menu-container">
+          {navLinks}
+          <GrClose
+            className="menu-icon"
+            size={30}
+            onClick={() => setOpen((prev) => !prev)}
+          />
+        </div>
+      ) : (
+        <div className="menu-container">
+          <SlMenu
+            className="menu-icon"
+            size={30}
+            onClick={() => setOpen((prev) => !prev)}
+          />
+        </div>
+      )}
     </nav>
   );
 };

@@ -48,7 +48,7 @@ export const FilterButton = styled(FaSearchLocation)`
   border: none;
   background: none;
   cursor: pointer;
-  padding: 0px 10px;
+  padding: 0px 15px;
   background-color: orange;
   height: 100%;
   border-radius: 0px 10px 10px 0px;

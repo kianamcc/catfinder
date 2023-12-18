@@ -19,15 +19,15 @@ export const HomeContainer = styled.section`
   }
 
   @media ${({ theme }) => theme.desktop} {
-    padding: 90px;
+    padding: 70px 90px;
   }
 `;
 
 export const HomeTitle = styled.h1`
-  font-size: 2rem;
+  font-size: 1.8rem;
 
   @media ${({ theme }) => theme.tablet} {
-    font-size: 3rem;
+    font-size: 2.8rem;
   }
 
   @media ${({ theme }) => theme.desktop} {
@@ -45,7 +45,7 @@ export const HomeButton = styled.button`
   font-size: 1.2rem;
   font-weight: 600;
   border: none;
-  border-radius: 20px;
+  border-radius: 25px;
   cursor: pointer;
   width: 100%;
   color: white;
@@ -60,20 +60,31 @@ export const HomeButton = styled.button`
   }
 
   @media ${({ theme }) => theme.tablet} {
-    width: 70%;
+    width: 50%;
   }
 
   @media ${({ theme }) => theme.desktop} {
-    width: 50%;
+    width: 40%;
   }
 `;
 
 export const StyledImg = styled.img`
-  width: 100%;
+  max-width: 350px;
+  max-height: 350px;
   border-radius: 50%;
   position: relative;
   transform: translateX(100%);
   animation: slideIn 250ms forwards;
+
+  @media ${({ theme }) => theme.tablet} {
+    max-width: 350px;
+    max-height: 350px;
+  }
+
+  @media ${({ theme }) => theme.desktop} {
+    max-width: 450px;
+    max-height: 450px;
+  }
 
   @keyframes slideIn {
     from {
@@ -87,7 +98,7 @@ export const StyledImg = styled.img`
 `;
 
 export const HomeRightContainer = styled.div`
-  flex: 1;
+  flex: 0.75;
   display: flex;
   flex-shrink: 0;
   justify-content: center;

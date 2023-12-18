@@ -45,12 +45,12 @@
   margin-left: auto;
   border: none;
   background-color: #ffbe0b;
-  border-radius: 15px;
+  border-radius: 25px;
   letter-spacing: 1.5px;
 }
 
 .fav-link {
-  padding: 10px;
+  padding: 10px 16px;
   display: block;
   color: white;
 }

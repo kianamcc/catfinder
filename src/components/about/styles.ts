@@ -16,7 +16,6 @@ export const AboutSectionContainer = styled.div`
   justify-content: center;
   gap: 50px;
   padding: 50px 42px;
-  text-align: center;
 
   @media ${({ theme }) => theme.tablet} {
     text-align: left;

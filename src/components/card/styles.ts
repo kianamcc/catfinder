@@ -14,7 +14,6 @@ export const CardContainer = styled.div`
   padding: 1.5em;
   background-color: white;
   transition: all 250ms ease-in-out;
-  margin: 25px 0px;
 
   &:hover {
     transition: all 250ms ease-in-out;
@@ -25,9 +24,13 @@ export const CardContainer = styled.div`
 export const CardsContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, 300px);
-  grid-gap: 50px;
+  grid-gap: 25px;
   justify-content: center;
   align-content: center;
+
+  @media ${({ theme }) => theme.tablet} {
+    grid-gap: 40px;
+  }
 `;
 
 export const CardTopSection = styled.div`
