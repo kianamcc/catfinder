@@ -9,7 +9,7 @@ import MobileNavBar from "./components/mobilenavbar/MobileNavBar";
 import Cards from "./components/card";
 import Home from "./components/home";
 import About from "./components/about/About";
-import Donate from "./components/donate/Donate";
+import Donate from "./components/donate";
 import Filter from "./components/filter/Filter";
 import Footer from "./components/footer/Footer";
 import catDataTest from "./data";

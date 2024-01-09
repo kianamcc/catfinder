@@ -69,22 +69,30 @@ export const HomeButton = styled.button`
 `;
 
 export const StyledImg = styled.img`
-  max-width: 350px;
-  max-height: 350px;
-  border-radius: 50%;
-  position: relative;
-  transform: translateX(100%);
-  animation: slideIn 250ms forwards;
+  max-width: 320px;
+  max-height: 320px;
+  border-radius: 33% 67% 42% 58% / 49% 37% 63% 51%;
+  z-index: 2;
 
   @media ${({ theme }) => theme.tablet} {
-    max-width: 350px;
-    max-height: 350px;
+    max-width: 340px;
+    max-height: 340px;
   }
 
   @media ${({ theme }) => theme.desktop} {
-    max-width: 450px;
-    max-height: 450px;
+    max-width: 440px;
+    max-height: 410px;
   }
+`;
+
+export const HomeRightContainer = styled.div`
+  flex: 0.75;
+  display: flex;
+  flex-shrink: 0;
+  justify-content: center;
+  position: relative;
+  transform: translateX(100%);
+  animation: slideIn 250ms forwards;
 
   @keyframes slideIn {
     from {
@@ -95,13 +103,6 @@ export const StyledImg = styled.img`
       transform: translateX(0%);
     }
   }
-`;
-
-export const HomeRightContainer = styled.div`
-  flex: 0.75;
-  display: flex;
-  flex-shrink: 0;
-  justify-content: center;
 `;
 
 export const HomeLeftContainer = styled.div`

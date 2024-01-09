@@ -37,7 +37,7 @@ export const AboutSectionContainer = styled.div`
 `;
 
 export const BackgroundImageContainer = styled.div`
-  height: 100vh;
+  height: 50vh;
   background-image: url(${blackCat});
   background-size: 0 0;
   background-position: center;
@@ -46,6 +46,14 @@ export const BackgroundImageContainer = styled.div`
   box-shadow: inset 0 0 0 50vw rgba(0, 0, 0, 0.3);
   display: flex;
   align-items: center;
+
+  @media ${({ theme }) => theme.tablet} {
+    height: 60vh;
+  }
+
+  @media ${({ theme }) => theme.desktop} {
+    height: 70vh;
+  }
 `;
 
 export const AboutUsContainer = styled.div`

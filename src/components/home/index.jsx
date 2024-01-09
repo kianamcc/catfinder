@@ -1,6 +1,7 @@
 import React from "react";
 
 import catImg from "../../assets/cat2.jpg";
+
 import {
   HomeTitle,
   Subheading,
@@ -10,7 +11,7 @@ import {
   HomeRightContainer,
   HomeLeftContainer,
   StyledLink,
-} from "./styles.ts";
+} from "./styles";
 
 const Home = () => {
   return (

@@ -51,7 +51,6 @@ const Cards = (props) => {
               <CardImageContainer>
                 <CardImage
                   src={
-                    // cat.src // test, uncomment below when done
                     cat && cat.primary_photo_cropped
                       ? cat.primary_photo_cropped["small"]
                       : null
