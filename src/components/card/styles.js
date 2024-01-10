@@ -106,7 +106,7 @@ export const CardDescription = styled.div`
 `;
 
 export const NoFavoritesContainer = styled.div`
-  height: 100vh;
+  height: 75vh;
   display: flex;
   justify-content: center;
 `;

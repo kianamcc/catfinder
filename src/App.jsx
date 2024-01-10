@@ -39,10 +39,6 @@ const App = () => {
   let indexOfFirstPost = indexOfLastPost - catsPerPage;
 
   useEffect(() => {
-    const getCatFavorites = localStorage.getItem("catfinder-favorites");
-    const catFavoritesData = JSON.parse(getCatFavorites) || [];
-
-    setFavoriteCats(catFavoritesData);
     setCatDataLoading(true);
 
     if (clicked) {
@@ -158,10 +154,6 @@ const App = () => {
       })
     );
 
-    if (favoriteCurrentCats.length === 1) {
-      setCurrentPage((prev) => prev - 1);
-    }
-
     setFavoriteCats(filterUnfavorite);
     saveToLocalStorage(filterUnfavorite);
   };
@@ -217,7 +209,6 @@ const App = () => {
             element={
               <Fragment>
                 <Home />
-
                 <Filter
                   locationHandler={locationHandler}
                   error={error}

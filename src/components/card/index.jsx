@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { MdEmail, MdLocationOn } from "react-icons/md";
