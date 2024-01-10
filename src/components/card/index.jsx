@@ -3,8 +3,6 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { MdEmail, MdLocationOn } from "react-icons/md";
 
-import Pagination from "../pagination/Pagination";
-
 import {
   CardContainer,
   CardTopSection,
@@ -17,13 +15,12 @@ import {
   CardHashtags,
   CardDescription,
   StyledAiFillHeart,
-  NoFavoritesContainer,
-  NoFavoritesText,
+  CardSection,
 } from "./styles";
 
 const Cards = (props) => {
   return (
-    <section id="card-container">
+    <CardSection id="card-container">
       <CardsContainer>
         {props.currentCats.map((cat) => {
           return (
@@ -137,27 +134,7 @@ const Cards = (props) => {
           );
         })}
       </CardsContainer>
-
-      {props.totalCats ? (
-        <Pagination
-          currentCats={props.currentCats}
-          totalCats={props.totalCats}
-          catsPerPage={props.catsPerPage}
-          handlePageClick={props.handlePageClick}
-          numberOfPages={5}
-          currentPage={props.currentPage}
-          handleNextPage={props.handleNextPage}
-          handlePreviousPage={props.handlePreviousPage}
-          rowPageNumberLimit={props.rowPageNumberLimit}
-          minPageNumber={props.minPageNumber}
-          maxPageNumber={props.maxPageNumber}
-        />
-      ) : (
-        <NoFavoritesContainer>
-          <NoFavoritesText>No cats found...</NoFavoritesText>
-        </NoFavoritesContainer>
-      )}
-    </section>
+    </CardSection>
   );
 };
 

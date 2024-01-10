@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 import "./Footer.css";
 import { BsFacebook, BsInstagram } from "react-icons/bs";
 
@@ -11,26 +13,22 @@ const Footer = () => {
             <div className="footer-column">
               <h3>Resources</h3>
               <ul>
-                <li>Donate</li>
-                <li>Get Involved</li>
-                <li>Events</li>
+                <li>
+                  <Link className="styled-link" to={"/donate"}>
+                    Donate
+                  </Link>
+                </li>
                 <li>FAQs</li>
               </ul>
             </div>
             <div className="footer-column">
               <h3>Contact</h3>
               <ul>
-                <li>Hours of Operation</li>
-                <li>Phone: 000-000-0000</li>
+                <li>Hours of Operation: Monday to Friday, 8am-5pm (PST)</li>
                 <li>Email: general@catfinder.org</li>
               </ul>
             </div>
-            <div className="footer-column">
-              <h3>News</h3>
-              <ul>
-                <li>Stay Updated</li>
-              </ul>
-            </div>
+
             <div className="footer-column">
               <h3>Connect With Us</h3>
               <ul className="social-icons-container">

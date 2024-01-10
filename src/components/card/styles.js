@@ -5,6 +5,10 @@ export const StyledAiFillHeart = styled(AiFillHeart)`
   color: #ef233c;
 `;
 
+export const CardSection = styled.section`
+  height: 100%;
+`;
+
 export const CardContainer = styled.div`
   box-shadow: 10px 10px 10px grey;
   border-radius: 20px;
@@ -103,15 +107,4 @@ export const CardDescription = styled.div`
   text-overflow: ellipsis;
   overflow-y: scroll;
   line-height: 1.5em;
-`;
-
-export const NoFavoritesContainer = styled.div`
-  height: 75vh;
-  display: flex;
-  justify-content: center;
-`;
-
-export const NoFavoritesText = styled.h2`
-  font-size: 1.5rem;
-  padding-top: 50px;
 `;

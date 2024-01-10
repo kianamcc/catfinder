@@ -1,4 +1,5 @@
 import axios from "axios";
+import styled from "styled-components";
 import { Fragment, useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { FadeLoader } from "react-spinners";
@@ -12,13 +13,27 @@ import About from "./components/about/About";
 import Donate from "./components/donate";
 import Filter from "./components/filter/Filter";
 import Footer from "./components/footer/Footer";
+import Pagination from "./components/pagination/Pagination";
 import catDataTest from "./data";
 import catDataFavoritesTest from "./favoriteData";
+
+const NoFavoritesContainer = styled.div`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 100px;
+`;
+
+const NoFavoritesText = styled.h2`
+  font-size: 2rem;
+`;
 
 const { VITE_APP_API_KEY, VITE_APP_SECRET_KEY } = import.meta.env;
 
 const App = () => {
   const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const [favoriteCats, setFavoriteCats] = useState([]);
   const [catData, setCatData] = useState([]);
   const [currentCats, setCurrentCats] = useState([]);
@@ -85,15 +100,17 @@ const App = () => {
             })
 
             .catch((error) => {
-              console.log("Error fetching data", error);
+              console.log("Error fetching data.", error);
               setIsFilterLoading(false);
               setError(true);
+              setErrorMessage("Error fetching data.");
             });
         }
       })
       .catch((error) => {
-        console.log("Error fetching access token! ", error);
+        console.log("Error fetching access token.", error);
         setError(true);
+        setErrorMessage("Error fetching access token.");
       });
   }, [location, clicked]);
 
@@ -141,6 +158,10 @@ const App = () => {
 
   /* REMOVE FAVORITES */
   const handleRemoveFavorites = (cat) => {
+    if (favoriteCurrentCats.length === 1 && currentPage > 1) {
+      setCurrentPage((prev) => prev - 1);
+    }
+
     const filterUnfavorite = favoriteCats.filter(
       (currentFav) => currentFav.id !== cat.id
     );
@@ -174,7 +195,7 @@ const App = () => {
     setCurrentPage(pageNumber);
   };
 
-  const handleNextPage = () => {
+  const handleNextPage = (catData) => {
     if (currentPage < Math.ceil(catData.length / catsPerPage)) {
       setCurrentPage((prev) => prev + 1);
     }
@@ -214,13 +235,14 @@ const App = () => {
                   error={error}
                   isFilterLoading={isFilterLoading}
                 />
+
                 {catDataLoading ? (
                   <div className="data-loading-container">
                     <h2 className="data-loading">Loading cats...</h2>
                     <FadeLoader color="#ffbe0b" size={10} />
                   </div>
                 ) : (
-                  <>
+                  <div style={{ display: "flex", flexDirection: "column" }}>
                     <Cards
                       currentCats={currentCats}
                       handleFavorites={handleFavorites}
@@ -236,7 +258,22 @@ const App = () => {
                       minPageNumber={minPageNumber}
                       maxPageNumber={maxPageNumber}
                     />
-                  </>
+                    {catData.length && (
+                      <Pagination
+                        currentCats={currentCats}
+                        totalCats={catData.length}
+                        catsPerPage={catsPerPage}
+                        handlePageClick={handlePageClick}
+                        numberOfPages={5}
+                        currentPage={currentPage}
+                        handleNextPage={() => handleNextPage(catData)}
+                        handlePreviousPage={handlePreviousPage}
+                        rowPageNumberLimit={rowPageNumberLimit}
+                        minPageNumber={minPageNumber}
+                        maxPageNumber={maxPageNumber}
+                      />
+                    )}
+                  </div>
                 )}
               </Fragment>
             }
@@ -246,23 +283,51 @@ const App = () => {
           <Route
             path="/favorites"
             element={
-              <>
-                <Cards
-                  currentCats={favoriteCurrentCats}
-                  handleFavorites={handleFavorites}
-                  handleRemoveFavorites={handleRemoveFavorites}
-                  totalCats={favoriteCats.length}
-                  catsPerPage={catsPerPage}
-                  handlePageClick={handlePageClick}
-                  numberOfPages={5}
-                  currentPage={currentPage}
-                  handleNextPage={handleNextPage}
-                  handlePreviousPage={handlePreviousPage}
-                  rowPageNumberLimit={rowPageNumberLimit}
-                  minPageNumber={minPageNumber}
-                  maxPageNumber={maxPageNumber}
-                />
-              </>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  minHeight: "100%",
+                }}
+              >
+                {!favoriteCats.length ? (
+                  <NoFavoritesContainer>
+                    <NoFavoritesText>No cats found...</NoFavoritesText>
+                    <p>Favorite a cat and come back to this page!</p>
+                  </NoFavoritesContainer>
+                ) : (
+                  <div style={{ display: "flex", flexDirection: "column" }}>
+                    <Cards
+                      currentCats={favoriteCurrentCats}
+                      handleFavorites={handleFavorites}
+                      handleRemoveFavorites={handleRemoveFavorites}
+                      totalCats={favoriteCurrentCats}
+                      catsPerPage={catsPerPage}
+                      handlePageClick={handlePageClick}
+                      numberOfPages={5}
+                      currentPage={currentPage}
+                      handleNextPage={handleNextPage}
+                      handlePreviousPage={handlePreviousPage}
+                      rowPageNumberLimit={rowPageNumberLimit}
+                      minPageNumber={minPageNumber}
+                      maxPageNumber={maxPageNumber}
+                    />
+                    <Pagination
+                      currentCats={favoriteCurrentCats}
+                      totalCats={favoriteCats.length}
+                      catsPerPage={catsPerPage}
+                      handlePageClick={handlePageClick}
+                      numberOfPages={5}
+                      currentPage={currentPage}
+                      handleNextPage={() => handleNextPage(favoriteCats)}
+                      handlePreviousPage={handlePreviousPage}
+                      rowPageNumberLimit={rowPageNumberLimit}
+                      minPageNumber={minPageNumber}
+                      maxPageNumber={maxPageNumber}
+                    />
+                  </div>
+                )}
+              </div>
             }
           />
         </Routes>
