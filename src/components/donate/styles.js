@@ -37,11 +37,9 @@ export const DonateTopSection = styled.div`
     z-index: -1;
     width: 100%;
     height: 100%;
-    border: 2px solid pink;
     background-image: url(${catImage});
     background-size: cover;
-    background-repeat: no-repeat;
-    background-color: #ffced6;
+    background-repeat: repeat;
     background-position: 60% -70px;
   }
 
@@ -53,7 +51,7 @@ export const DonateTopSection = styled.div`
     height: 70vh;
 
     &::before {
-      background-position: 60% -170px;
+      background-position: 60% -167px;
     }
   }
 `;
