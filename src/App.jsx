@@ -235,7 +235,6 @@ const App = () => {
                   error={error}
                   isFilterLoading={isFilterLoading}
                 />
-
                 {catDataLoading ? (
                   <div className="data-loading-container">
                     <h2 className="data-loading">Loading cats...</h2>
@@ -258,7 +257,7 @@ const App = () => {
                       minPageNumber={minPageNumber}
                       maxPageNumber={maxPageNumber}
                     />
-                    {catData.length && (
+                    {!!catData.length && (
                       <Pagination
                         currentCats={currentCats}
                         totalCats={catData.length}
