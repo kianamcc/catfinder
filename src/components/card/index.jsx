@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { MdEmail, MdLocationOn } from "react-icons/md";
@@ -51,7 +51,6 @@ const Cards = (props) => {
               <CardImageContainer>
                 <CardImage
                   src={
-                    // cat.src // test, uncomment below when done
                     cat && cat.primary_photo_cropped
                       ? cat.primary_photo_cropped["small"]
                       : null

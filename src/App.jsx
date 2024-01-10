@@ -9,7 +9,7 @@ import MobileNavBar from "./components/mobilenavbar/MobileNavBar";
 import Cards from "./components/card";
 import Home from "./components/home";
 import About from "./components/about/About";
-import Donate from "./components/donate/Donate";
+import Donate from "./components/donate";
 import Filter from "./components/filter/Filter";
 import Footer from "./components/footer/Footer";
 import catDataTest from "./data";
@@ -39,10 +39,6 @@ const App = () => {
   let indexOfFirstPost = indexOfLastPost - catsPerPage;
 
   useEffect(() => {
-    const getCatFavorites = localStorage.getItem("catfinder-favorites");
-    const catFavoritesData = JSON.parse(getCatFavorites) || [];
-
-    setFavoriteCats(catFavoritesData);
     setCatDataLoading(true);
 
     if (clicked) {
@@ -158,10 +154,6 @@ const App = () => {
       })
     );
 
-    if (favoriteCurrentCats.length === 1) {
-      setCurrentPage((prev) => prev - 1);
-    }
-
     setFavoriteCats(filterUnfavorite);
     saveToLocalStorage(filterUnfavorite);
   };
@@ -217,7 +209,6 @@ const App = () => {
             element={
               <Fragment>
                 <Home />
-
                 <Filter
                   locationHandler={locationHandler}
                   error={error}

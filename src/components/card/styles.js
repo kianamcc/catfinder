@@ -28,8 +28,14 @@ export const CardsContainer = styled.div`
   justify-content: center;
   align-content: center;
 
+  @media ${({ theme }) => theme.mobile} {
+    margin: 25px 0px;
+  }
+
   @media ${({ theme }) => theme.tablet} {
     grid-gap: 40px;
+    grid-template-columns: repeat(auto-fill, 280px);
+    margin: 50px 10px 0px 10px;
   }
 `;
 
@@ -100,7 +106,7 @@ export const CardDescription = styled.div`
 `;
 
 export const NoFavoritesContainer = styled.div`
-  height: 100vh;
+  height: 75vh;
   display: flex;
   justify-content: center;
 `;
