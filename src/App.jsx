@@ -46,6 +46,7 @@ const App = () => {
     }
 
     setError(false);
+    console.log("triggered");
 
     axios
       .post(
@@ -83,7 +84,6 @@ const App = () => {
 
               setCatData(catsWithIsFavoriteProperty);
             })
-
             .catch((error) => {
               setIsFilterLoading(false);
               setError(true);
@@ -93,7 +93,7 @@ const App = () => {
       .catch((error) => {
         setError(true);
       });
-  }, [location, clicked]);
+  }, [input, clicked]);
 
   useEffect(() => {
     setCurrentCats(catData.slice(indexOfFirstPost, indexOfLastPost));
