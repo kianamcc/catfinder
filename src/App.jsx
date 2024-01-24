@@ -85,14 +85,12 @@ const App = () => {
             })
 
             .catch((error) => {
-              console.log("Error fetching data", error);
               setIsFilterLoading(false);
               setError(true);
             });
         }
       })
       .catch((error) => {
-        console.log("Error fetching access token! ", error);
         setError(true);
       });
   }, [location, clicked]);
