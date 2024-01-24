@@ -33,7 +33,7 @@ const App = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [minPageNumber, setMinPageNumber] = useState(1);
   const [maxPageNumber, setMaxPageNumber] = useState(3);
-  const [catsPerPage] = useState(25);
+  const [catsPerPage] = useState(26);
   /* Cat Indexing */
   let indexOfLastPost = currentPage * catsPerPage;
   let indexOfFirstPost = indexOfLastPost - catsPerPage;
@@ -46,7 +46,6 @@ const App = () => {
     }
 
     setError(false);
-    console.log("triggered");
 
     axios
       .post(
@@ -100,7 +99,7 @@ const App = () => {
     setFavoriteCurrentCats(
       favoriteCats.slice(indexOfFirstPost, indexOfLastPost)
     );
-  }, [catData, currentPage]);
+  }, [catData, favoriteCats, currentPage]);
 
   /* STORAGE HANDLING */
   const saveToLocalStorage = (items) => {
@@ -173,6 +172,7 @@ const App = () => {
   };
 
   const handleNextPage = () => {
+    console.log(currentPage);
     if (currentPage < Math.ceil(catData.length / catsPerPage)) {
       setCurrentPage((prev) => prev + 1);
     }
