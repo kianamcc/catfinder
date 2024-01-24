@@ -4,7 +4,13 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   base: "",
   plugins: [react()],
-  cors: false,
+  proxy: {
+    "/proxy": {
+      target: "https://api.petfinder.com/v2",
+      changeOrigin: true,
+      rewrite: (path) => path.replace(/^\/proxy/, ""),
+    },
+  },
   server: {
     open: true,
   },

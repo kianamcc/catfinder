@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { IoPawSharp } from "react-icons/io5";
 import { Link } from "react-scroll";
 import {
@@ -42,23 +42,27 @@ const Pagination = (props) => {
   });
 
   return (
-    <section className="pagination">
-      <div className="pagination-container">
-        <Link to="filter" spy={true} smooth={true} duration={500}>
-          <BsFillArrowLeftCircleFill
-            className="arrow-icon"
-            onClick={props.handlePreviousPage}
-          />
-        </Link>
-        {renderPages}
-        <Link to="filter" spy={true} smooth={true} duration={500}>
-          <BsFillArrowRightCircleFill
-            className="arrow-icon"
-            onClick={props.handleNextPage}
-          />
-        </Link>
-      </div>
-    </section>
+    <>
+      {props.currentPage ? (
+        <section className="pagination">
+          <div className="pagination-container">
+            <Link to="filter" spy={true} smooth={true} duration={500}>
+              <BsFillArrowLeftCircleFill
+                className="arrow-icon"
+                onClick={props.handlePreviousPage}
+              />
+            </Link>
+            {renderPages}
+            <Link to="filter" spy={true} smooth={true} duration={500}>
+              <BsFillArrowRightCircleFill
+                className="arrow-icon"
+                onClick={props.handleNextPage}
+              />
+            </Link>
+          </div>
+        </section>
+      ) : null}
+    </>
   );
 };
 

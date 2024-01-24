@@ -33,10 +33,12 @@ const App = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [minPageNumber, setMinPageNumber] = useState(1);
   const [maxPageNumber, setMaxPageNumber] = useState(3);
-  const [catsPerPage] = useState(26);
+  const [catsPerPage] = useState(25);
+
   /* Cat Indexing */
   let indexOfLastPost = currentPage * catsPerPage;
   let indexOfFirstPost = indexOfLastPost - catsPerPage;
+  const baseUrl = "https://api.petfinder.com/v2";
 
   useEffect(() => {
     setCatDataLoading(true);
@@ -47,9 +49,11 @@ const App = () => {
 
     setError(false);
 
+    // setCatData(catDataTest);
+
     axios
       .post(
-        "https://api.petfinder.com/v2/oauth2/token",
+        `${baseUrl}/oauth2/token`,
         `grant_type=client_credentials&client_id=${VITE_APP_API_KEY}&client_secret=${VITE_APP_SECRET_KEY}`
       )
       .then((response) => {
@@ -61,9 +65,9 @@ const App = () => {
 
         for (let page = 1; page <= 8; page++) {
           if (input) {
-            url = `https://api.petfinder.com/v2/animals?type=cat&limit=100&location=${input}`;
+            url = `${baseUrl}/animals?type=cat&limit=100&location=${input}`;
           } else {
-            url = `https://api.petfinder.com/v2/animals?type=cat&limit=100&page=${page}`;
+            url = `${baseUrl}/animals?type=cat&limit=100&page=${page}`;
           }
           axios
             .get(url, {
@@ -83,19 +87,29 @@ const App = () => {
 
               setCatData(catsWithIsFavoriteProperty);
             })
-            .catch((error) => {
+            .catch(() => {
               setIsFilterLoading(false);
-              setError(true);
+              if (input) {
+                setError(true);
+              }
             });
         }
       })
-      .catch((error) => {
+      .catch(() => {
         setError(true);
       });
   }, [input, clicked]);
 
   useEffect(() => {
-    setCurrentCats(catData.slice(indexOfFirstPost, indexOfLastPost));
+    if (
+      currentPage === Math.ceil(catData.length / catsPerPage) &&
+      catData[indexOfLastPost - 1]
+    ) {
+      setCurrentCats(catData.slice(indexOfLastPost - 1));
+    } else {
+      setCurrentCats(catData.slice(indexOfFirstPost, indexOfLastPost));
+    }
+
     setFavoriteCurrentCats(
       favoriteCats.slice(indexOfFirstPost, indexOfLastPost)
     );
@@ -172,14 +186,12 @@ const App = () => {
   };
 
   const handleNextPage = () => {
-    console.log(currentPage);
     if (currentPage < Math.ceil(catData.length / catsPerPage)) {
-      setCurrentPage((prev) => prev + 1);
+      setCurrentPage((prevPage) => prevPage + 1);
     }
-
     if (
       currentPage + 1 > maxPageNumber &&
-      currentPage + 1 < Math.ceil(catData.length / catsPerPage)
+      currentPage + 1 <= Math.ceil(catData.length / catsPerPage)
     ) {
       setMaxPageNumber(maxPageNumber + rowPageNumberLimit);
       setMinPageNumber(minPageNumber + rowPageNumberLimit);
@@ -251,14 +263,6 @@ const App = () => {
                   handleRemoveFavorites={handleRemoveFavorites}
                   totalCats={favoriteCats.length}
                   catsPerPage={catsPerPage}
-                  handlePageClick={handlePageClick}
-                  numberOfPages={5}
-                  currentPage={currentPage}
-                  handleNextPage={handleNextPage}
-                  handlePreviousPage={handlePreviousPage}
-                  rowPageNumberLimit={rowPageNumberLimit}
-                  minPageNumber={minPageNumber}
-                  maxPageNumber={maxPageNumber}
                 />
               </>
             }
