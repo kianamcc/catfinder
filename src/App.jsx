@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useState, Suspense, lazy } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { FadeLoader } from "react-spinners";
 
@@ -8,12 +8,13 @@ import Navbar from "./components/navbar/Navbar";
 import MobileNavBar from "./components/mobilenavbar/MobileNavBar";
 import Cards from "./components/card";
 import Home from "./components/home";
-import About from "./components/about/About";
-import Donate from "./components/donate";
 import Filter from "./components/filter/Filter";
 import Footer from "./components/footer/Footer";
 import catDataTest from "./data";
 import catDataFavoritesTest from "./favoriteData";
+
+const About = lazy(() => import("./components/about/About"));
+const Donate = lazy(() => import("./components/donate"));
 
 const { VITE_APP_API_KEY, VITE_APP_SECRET_KEY } = import.meta.env;
 
@@ -48,8 +49,6 @@ const App = () => {
     }
 
     setError(false);
-
-    // setCatData(catDataTest);
 
     axios
       .post(
@@ -213,61 +212,63 @@ const App = () => {
       <Router>
         <Navbar />
         <MobileNavBar />
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Fragment>
-                <Home />
-                <Filter
-                  locationHandler={locationHandler}
-                  error={error}
-                  isFilterLoading={isFilterLoading}
-                />
-                {catDataLoading ? (
-                  <div className="data-loading-container">
-                    <h2 className="data-loading">Loading cats...</h2>
-                    <FadeLoader color="#ffbe0b" size={10} />
-                  </div>
-                ) : (
-                  <>
-                    <Cards
-                      currentCats={currentCats}
-                      handleFavorites={handleFavorites}
-                      handleRemoveFavorites={handleRemoveFavorites}
-                      totalCats={catData.length}
-                      catsPerPage={catsPerPage}
-                      handlePageClick={handlePageClick}
-                      numberOfPages={5}
-                      currentPage={currentPage}
-                      handleNextPage={handleNextPage}
-                      handlePreviousPage={handlePreviousPage}
-                      rowPageNumberLimit={rowPageNumberLimit}
-                      minPageNumber={minPageNumber}
-                      maxPageNumber={maxPageNumber}
-                    />
-                  </>
-                )}
-              </Fragment>
-            }
-          />
-          <Route path="/about" element={<About />} />
-          <Route path="/donate" element={<Donate />} />
-          <Route
-            path="/favorites"
-            element={
-              <>
-                <Cards
-                  currentCats={favoriteCurrentCats}
-                  handleFavorites={handleFavorites}
-                  handleRemoveFavorites={handleRemoveFavorites}
-                  totalCats={favoriteCats.length}
-                  catsPerPage={catsPerPage}
-                />
-              </>
-            }
-          />
-        </Routes>
+        <Suspense fallback={<FadeLoader color="#ffbe0b" size={10} />}>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Fragment>
+                  <Home />
+                  <Filter
+                    locationHandler={locationHandler}
+                    error={error}
+                    isFilterLoading={isFilterLoading}
+                  />
+                  {catDataLoading ? (
+                    <div className="data-loading-container">
+                      <h2 className="data-loading">Loading cats...</h2>
+                      <FadeLoader color="#ffbe0b" size={10} />
+                    </div>
+                  ) : (
+                    <>
+                      <Cards
+                        currentCats={currentCats}
+                        handleFavorites={handleFavorites}
+                        handleRemoveFavorites={handleRemoveFavorites}
+                        totalCats={catData.length}
+                        catsPerPage={catsPerPage}
+                        handlePageClick={handlePageClick}
+                        numberOfPages={5}
+                        currentPage={currentPage}
+                        handleNextPage={handleNextPage}
+                        handlePreviousPage={handlePreviousPage}
+                        rowPageNumberLimit={rowPageNumberLimit}
+                        minPageNumber={minPageNumber}
+                        maxPageNumber={maxPageNumber}
+                      />
+                    </>
+                  )}
+                </Fragment>
+              }
+            />
+            <Route path="/about" element={<About />} />
+            <Route path="/donate" element={<Donate />} />
+            <Route
+              path="/favorites"
+              element={
+                <>
+                  <Cards
+                    currentCats={favoriteCurrentCats}
+                    handleFavorites={handleFavorites}
+                    handleRemoveFavorites={handleRemoveFavorites}
+                    totalCats={favoriteCats.length}
+                    catsPerPage={catsPerPage}
+                  />
+                </>
+              }
+            />
+          </Routes>
+        </Suspense>
         <Footer />
       </Router>
     </div>
